@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/ClientConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/ClientModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/riccardo/client/img/avatar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/riccardo/client/img/sendmail.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/riccardo/client/list_label.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/riccardo/client/list_mail.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/riccardo/client/profile_info.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/Server.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/ServerConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/resources/com/riccardo/server/img/refresh.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/resources/com/riccardo/server/img/server.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/resources/com/riccardo/server/main.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/resources/com/riccardo/server/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2KrvB7IMMRNPcwrgUiajIUkJGp4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-18&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/riccardo/Scrivania/Email-provider&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Client/src/main/resources" />
+      <recent name="$PROJECT_DIR$/Client/src/main/java" />
+      <recent name="$PROJECT_DIR$/Server/src/main/resources" />
+      <recent name="$PROJECT_DIR$/Server/src/main/java" />
+      <recent name="$PROJECT_DIR$/Server" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Client/src/main/resources/com/riccardo" />
+      <recent name="$PROJECT_DIR$/Client/src/main/resources/com" />
+      <recent name="$PROJECT_DIR$/Client/src/main/java" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Client 1">
+    <configuration name="Client 1" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.riccardo.client.Client" />
+      <module name="Client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.riccardo.client.Client" />
+      <module name="Client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientConnection" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.riccardo.client.ClientConnection" />
+      <module name="Client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.riccardo.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.riccardo.server.Server" />
+      <module name="Server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerConnection" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.riccardo.server.ServerConnection" />
+      <module name="Server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.riccardo.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Client 1" />
+      <item itemvalue="Application.Client" />
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Application.ClientConnection" />
+      <item itemvalue="Application.ServerConnection" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ClientConnection" />
+        <item itemvalue="Application.ServerConnection" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="" />
+      <created>1674745380396</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1674745380396</updated>
+      <workItem from="1674745381500" duration="382000" />
+      <workItem from="1674745791791" duration="214000" />
+      <workItem from="1674746518917" duration="897000" />
+      <workItem from="1674748330417" duration="780000" />
+      <workItem from="1675628209161" duration="2901000" />
+      <workItem from="1676369239417" duration="1222000" />
+      <workItem from="1676823402298" duration="313000" />
+      <workItem from="1676823794678" duration="832000" />
+      <workItem from="1677843453200" duration="22000" />
+      <workItem from="1677845151321" duration="857000" />
+      <workItem from="1677846135168" duration="567000" />
+      <workItem from="1677847803478" duration="452000" />
+      <workItem from="1677848524706" duration="106000" />
+      <workItem from="1677850879175" duration="25000" />
+      <workItem from="1678528673414" duration="1920000" />
+      <workItem from="1678530946174" duration="39000" />
+      <workItem from="1679312789175" duration="1812000" />
+      <workItem from="1679912462207" duration="2246000" />
+      <workItem from="1680769883334" duration="622000" />
+      <workItem from="1681134164038" duration="90000" />
+      <workItem from="1681641891320" duration="18000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

@@ -1,0 +1,15 @@
+.log-text {
+    -fx-control-inner-background: #0D0D0D;
+    -fx-control-inner-border: transparent;
+    -fx-background-insets: 0;
+    -fx-text-fill: #4A8C5B;
+    -fx-font-family: "Fira Code";
+    -fx-font-size: 1.1em;
+}
+
+.log-title {
+    -fx-text-fill: #0D0D0D;
+    -fx-font-family: "HelveticaNowDisplay Bold";
+    -fx-font-size: 2em;
+    -fx-font-weight: bold;
+}
