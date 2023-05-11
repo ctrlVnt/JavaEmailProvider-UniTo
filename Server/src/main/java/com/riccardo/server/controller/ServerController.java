@@ -9,7 +9,7 @@ import javafx.scene.text.Text;
  *
  * @author Riccardo Venturini
  */
-public class ServerController implements Runnable  {
+public class ServerController {
 
     @FXML
     private Text server_text;
@@ -20,10 +20,12 @@ public class ServerController implements Runnable  {
     @FXML
     private ImageView refresh;
 
-    // Metodo per inizializzare la schermata del server
     @FXML
     private void initialize() {
-        // Qui puoi aggiungere eventuali operazioni di inizializzazione
+        updateLog("Server is starting...");
+
+        Thread serverConnection = new Thread(new ServerConnection(4445));
+        serverConnection.start();
     }
 
     // Metodo che verrà chiamato quando si clicca sull'immagine di refresh
@@ -35,10 +37,5 @@ public class ServerController implements Runnable  {
     // Metodo per aggiornare il testo del log
     public void updateLog(String text) {
         log_text.appendText(text + "\n");
-    }
-
-    @Override
-    public void run() {
-
     }
 }

@@ -1,6 +1,7 @@
 package com.riccardo.client;
 
 import com.riccardo.client.controller.ClientController;
+import com.riccardo.client.model.ClientModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,31 +20,17 @@ public class Client extends Application {
     public void start(Stage stage) throws IOException {
 
         try {
-            BorderPane root = new BorderPane();
-            FXMLLoader listLoader = new FXMLLoader(getClass().getResource("list_label.fxml"));
-            root.setLeft(listLoader.load());
-            ClientController.ListLabelController listLabelController = new ClientController.ListLabelController();
-            listLoader.setController(listLabelController);
+            FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("main.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 800, 600);
 
-            FXMLLoader editorLoader = new FXMLLoader(getClass().getResource("list_mail.fxml"));
-            root.setCenter(editorLoader.load());
-            ClientController.ListMailController listMailController = new ClientController.ListMailController();
-            editorLoader.setController(listMailController);
+            ClientController clientcontroller = new ClientController();
+            fxmlLoader.setController(clientcontroller);
 
+            ClientModel model = new ClientModel();
+            ClientController.initModel(model);
 
-            FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("profile_info.fxml"));
-            root.setTop(menuLoader.load());
-            ClientController.ProfileInfoController profileInfoController = new ClientController.ProfileInfoController();
-            menuLoader.setController(profileInfoController);
-
-        /*DataModel model = new DataModel();
-        listLabelController.initModel(model);
-        editorController.initModel(model);
-        menuController.initModel(model);*/
-
-            Scene scene = new Scene(root, 800, 600);
-            stage.setScene(scene);
             stage.setTitle("Welcome in your mailbox!");
+            stage.setScene(scene);
             stage.show();
         }catch (IOException e1){
             e1.printStackTrace();
