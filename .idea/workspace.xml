@@ -4,19 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/Files/MailLists.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Files/Users.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerConnection.java" afterDir="false" />
+    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="Update">
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ComposeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/Email.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/riccardo/client/comp_message.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerOperations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/ClientConnection.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/ClientModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/ClientModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/riccardo/client/list_label.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/riccardo/client/list_mail.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/riccardo/client/profile_info.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/ServerConnection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +54,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
     "jdk.selected.JAVA_MODULE": "openjdk-18",
-    "last_opened_file_path": "/home/riccardo/Scrivania/Prog III/Others progects/PROG-III-2021-2022",
+    "last_opened_file_path": "/home/riccardo/Scrivania/Prog III/Lab/Lez 11/org/prog3",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -70,11 +68,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Client/src/main/resources/com/riccardo/client" />
       <recent name="$PROJECT_DIR$/Client/src/main/resources" />
       <recent name="$PROJECT_DIR$/Client/src/main/java" />
       <recent name="$PROJECT_DIR$/Server/src/main/resources" />
       <recent name="$PROJECT_DIR$/Server/src/main/java" />
-      <recent name="$PROJECT_DIR$/Server" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib" />
@@ -82,6 +80,11 @@
       <recent name="$PROJECT_DIR$/Client/src/main/resources/com" />
       <recent name="$PROJECT_DIR$/Client/src/main/java" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean install" />
+    </option>
   </component>
   <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false">
@@ -145,6 +148,11 @@
       <workItem from="1683632883280" duration="1170000" />
       <workItem from="1683783776783" duration="4265000" />
       <workItem from="1683792755736" duration="8311000" />
+      <workItem from="1683801899739" duration="291000" />
+      <workItem from="1683807877117" duration="10934000" />
+      <workItem from="1683819669345" duration="138000" />
+      <workItem from="1683821536606" duration="2875000" />
+      <workItem from="1683878912592" duration="13872000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1681642056980</created>
@@ -153,7 +161,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681642056980</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Update">
+      <created>1683801941121</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1683801941121</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,6 +187,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
   </component>
 </project>

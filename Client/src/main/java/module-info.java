@@ -1,6 +1,8 @@
 module com.riccardo.client {
     requires javafx.controls;
     requires javafx.fxml;
+    requires json.simple;
+    requires javafx.web;
 
 
     opens com.riccardo.client to javafx.fxml;

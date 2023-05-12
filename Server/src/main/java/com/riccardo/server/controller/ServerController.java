@@ -24,7 +24,7 @@ public class ServerController {
     private void initialize() {
         updateLog("Server is starting...");
 
-        Thread serverConnection = new Thread(new ServerConnection(4445));
+        Thread serverConnection = new Thread(new ServerConnection(4445, this));
         serverConnection.start();
     }
 
