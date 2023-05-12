@@ -65,10 +65,29 @@ public class ClientController {
 
         updateDetailView(emptyEmail);
 
+        /*inizio connessione server*/
         String serverAddress = "localhost";
         int port = 4445;
+        boolean success = false;
+        while(!success) {
+
+            success = tryCommunication(serverAddress, port);
+
+            if(success) {
+                continue;
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private boolean tryCommunication(String host, int port){
         try {
-            Socket socket = new Socket(serverAddress, port);
+            Socket socket = new Socket(host, port);
 
             try {
 
@@ -86,12 +105,14 @@ public class ClientController {
 
                 line = in.nextLine();
                 System.out.println(line);
+                return true;
             }
             finally {
                 socket.close();
             }
         } catch (IOException e) {
             System.err.println("Connection error: " + e.getMessage());
+            return false;
         }
     }
 
