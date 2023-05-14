@@ -1,0 +1,45 @@
+{
+  "users":[
+    { "name":"Katherine Johnson",
+      "mail": "Katherine.johnson@unito.it",
+      "mails": [
+        {
+          "from": "Paolo",
+          "to": "me",
+          "subjects":  "Importante",
+          "text": "È necessario che ci parliamo di persona, per mail rischiamo sempre fraintendimenti"
+        },
+        {
+          "from": "Alessandro",
+          "to": ["me", "Riccardo"],
+          "subjects": "A proposito della nostra ultima conversazione",
+          "text": "Ricordati di comprare il latte tornando a casa"
+        },
+        {
+          "from": "Enrico",
+          "to": "me",
+          "subjects": "Tanto va la gatta al lardo",
+          "text": "L'appuntamento è per domani alle 9, ci vediamo al solito posto"
+        }
+      ]
+    },
+    { "name":"Dorothy Vaughan",
+      "mail": "doodo345@mymail.com",
+      "mails": [
+        {
+          "from": "Enrico",
+          "to": ["me", "Giulia", "Gaia"],
+          "subjects":  "Non dimenticare...",
+          "text": "Ho sempre pensato valesse 42, tu sai di cosa parlo"
+        }
+      ]
+    },
+    { "name":"Henry Ford",
+      "mail": "hford@gmail.com",
+      "mails": [
+        {
+
+        }
+      ]
+    }
+  ]}

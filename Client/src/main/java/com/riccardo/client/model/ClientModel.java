@@ -6,10 +6,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Classe Client, conterrà la lista di mail che sarà il model
@@ -61,6 +64,10 @@ public class ClientModel {
      */
     public void deleteEmail(Email email) {
         inboxContent.remove(email);
+    }
+    
+    public void addInboxContent(Email email){
+        inboxContent.add(email);
     }
 
     /**

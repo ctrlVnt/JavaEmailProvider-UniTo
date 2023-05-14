@@ -9,4 +9,5 @@ module com.riccardo.client {
     exports com.riccardo.client;
     exports com.riccardo.client.controller;
     opens com.riccardo.client.controller to javafx.fxml;
+    exports com.riccardo.client.model;
 }

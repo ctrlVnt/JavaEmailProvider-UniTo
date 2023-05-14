@@ -25,12 +25,12 @@ public class ServerConnection implements Runnable{
                 Socket clientSocket = serverSocket.accept();
                 controller.updateLog("New connection from " + clientSocket.getInetAddress().getHostAddress());
 
-                Thread serverOperations = new Thread(new ServerOperations(clientSocket));
+                Thread serverOperations = new Thread(new ServerOperations(clientSocket, controller));
                 serverOperations.start();
             }
         } catch (IOException e) {
             System.err.println("Server connection error: " + e.getMessage());
-        } /*NOn sono sicuro di questa parte*/finally {
+        } /*Non sono sicuro di questa parte*/finally {
             if (socket!=null)
                 try {
                     socket.close();

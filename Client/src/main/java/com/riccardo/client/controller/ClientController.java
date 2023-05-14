@@ -43,12 +43,19 @@ public class ClientController {
     private Email emptyEmail;
 
     @FXML
-    public void initialize(){
-        if (this.model != null)
+    public void initialize() throws InterruptedException {
+        if (this.model != null) {
             throw new IllegalStateException("Model can only be initialized once");
+        }
         //istanza nuovo client
-        model = new ClientModel("studente@unito.it");
-        model.generateRandomEmails(10);
+        model = new ClientModel("Katherine.johnson@unito.it");
+        //model.generateRandomEmails(10);
+
+        /*thread per connessione al server*/
+        Thread connection = new Thread(new ClientConnection(model));
+        connection.start();
+        /*prima di caricare le mail aspetto che si colleghi*/
+        connection.join();
 
         selectedEmail = null;
 
@@ -64,56 +71,6 @@ public class ClientController {
         emptyEmail = new Email("", List.of(""), "", "");
 
         updateDetailView(emptyEmail);
-
-        /*inizio connessione server*/
-        String serverAddress = "localhost";
-        int port = 4445;
-        boolean success = false;
-        while(!success) {
-
-            success = tryCommunication(serverAddress, port);
-
-            if(success) {
-                continue;
-            }
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private boolean tryCommunication(String host, int port){
-        try {
-            Socket socket = new Socket(host, port);
-
-            try {
-
-                InputStream inStream = socket.getInputStream();
-                Scanner in = new Scanner(inStream);
-
-                ObjectOutputStream outStream = new ObjectOutputStream(socket.getOutputStream());
-
-                System.out.println("Sto per ricevere dati dal socket server!");
-
-                String line = in.nextLine();
-                System.out.println(line);
-
-                outStream.writeObject(new Date());
-
-                line = in.nextLine();
-                System.out.println(line);
-                return true;
-            }
-            finally {
-                socket.close();
-            }
-        } catch (IOException e) {
-            System.err.println("Connection error: " + e.getMessage());
-            return false;
-        }
     }
 
     /**
