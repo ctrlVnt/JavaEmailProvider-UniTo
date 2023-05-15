@@ -6,12 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -68,31 +63,6 @@ public class ClientModel {
     
     public void addInboxContent(Email email){
         inboxContent.add(email);
-    }
-
-    /**
-     *genera email random da aggiungere alla lista di email, ese verranno mostrate nella ui
-     */
-    public void generateRandomEmails(int n) {
-        String[] people = new String[] {"Paolo", "Alessandro", "Enrico", "Giulia", "Gaia", "Simone"};
-        String[] subjects = new String[] {
-                "Importante", "A proposito della nostra ultima conversazione", "Tanto va la gatta al lardo",
-                "Non dimenticare...", "Domani scuola" };
-        String[] texts = new String[] {
-                "È necessario che ci parliamo di persona, per mail rischiamo sempre fraintendimenti",
-                "Ricordati di comprare il latte tornando a casa",
-                "L'appuntamento è per domani alle 9, ci vediamo al solito posto",
-                "Ho sempre pensato valesse 42, tu sai di cosa parlo"
-        };
-        Random r = new Random();
-        for (int i=0; i<n; i++) {
-            Email email = new Email(
-                    people[r.nextInt(people.length)],
-                    List.of(people[r.nextInt(people.length)]),
-                    subjects[r.nextInt(subjects.length)],
-                    texts[r.nextInt(texts.length)]);
-            inboxContent.add(email);
-        }
     }
 }
 

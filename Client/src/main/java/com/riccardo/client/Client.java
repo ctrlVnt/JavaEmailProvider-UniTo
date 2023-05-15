@@ -28,7 +28,7 @@ public class Client extends Application {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("main.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 900, 600);
 
             ClientController clientcontroller = new ClientController();
             fxmlLoader.setController(clientcontroller);

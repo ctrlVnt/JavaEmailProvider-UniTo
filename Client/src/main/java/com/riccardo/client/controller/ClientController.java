@@ -2,21 +2,17 @@ package com.riccardo.client.controller;
 
 import com.riccardo.client.model.ClientModel;
 import com.riccardo.client.model.Email;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 
 public class ClientController {
 
@@ -42,17 +38,22 @@ public class ClientController {
     private Email selectedEmail;
     private Email emptyEmail;
 
+    ObjectOutputStream outputStream = null;
+    ObjectInputStream inputStream = null;
+
+    private String user;
+
     @FXML
     public void initialize() throws InterruptedException {
         if (this.model != null) {
             throw new IllegalStateException("Model can only be initialized once");
         }
         //istanza nuovo client
-        model = new ClientModel("Katherine.johnson@unito.it");
-        //model.generateRandomEmails(10);
+        user = "Katherine.johnson@unito.it";
+        model = new ClientModel(user);
 
         /*thread per connessione al server*/
-        Thread connection = new Thread(new ClientConnection(model));
+        Thread connection = new Thread(new ClientConnection(model, user, "firstConnection"));
         connection.start();
         /*prima di caricare le mail aspetto che si colleghi*/
         connection.join();
@@ -78,7 +79,6 @@ public class ClientController {
      */
     protected void showSelectedEmail(MouseEvent mouseEvent) {
         Email email = lstEmails.getSelectionModel().getSelectedItem();
-
         selectedEmail = email;
         updateDetailView(email);
     }
@@ -99,7 +99,11 @@ public class ClientController {
      * Elimina la mail selezionata
      */
     @FXML
-    protected void onDeleteButtonClick() {
+    protected void onDeleteButtonClick() throws InterruptedException {
+
+        Thread deletemail = new Thread(new ClientConnection(model, user, "deleteMail", selectedEmail));
+        deletemail.start();
+        /*Non aspetto l'eliminazione perché posso sempre aggiornare dopo*/
         model.deleteEmail(selectedEmail);
         updateDetailView(emptyEmail);
     }

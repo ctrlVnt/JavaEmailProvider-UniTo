@@ -1,7 +1,6 @@
 {
   "users":[
-    { "name":"Katherine Johnson",
-      "mail": "Katherine.johnson@unito.it",
+    { "mail": "Katherine.johnson@unito.it",
       "mails": [
         {
           "from": "Paolo",
@@ -20,11 +19,28 @@
           "to": "me",
           "subjects": "Tanto va la gatta al lardo",
           "text": "L'appuntamento è per domani alle 9, ci vediamo al solito posto"
+        },
+        {
+          "from": "Luca",
+          "to": "me",
+          "subjects":  "Test",
+          "text": "test"
+        },
+        {
+          "from": "Marco",
+          "to": "me",
+          "subjects": "Ci sei?",
+          "text": ""
+        },
+        {
+          "from": "Francesco",
+          "to": ["me", "Riccardo", "Giulia", "Gaia"],
+          "subjects": "What is Lorem Ipsum?",
+          "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
         }
       ]
     },
-    { "name":"Dorothy Vaughan",
-      "mail": "doodo345@mymail.com",
+    { "mail": "doodo345@mymail.com",
       "mails": [
         {
           "from": "Enrico",
@@ -34,8 +50,7 @@
         }
       ]
     },
-    { "name":"Henry Ford",
-      "mail": "hford@gmail.com",
+    { "mail": "hford@gmail.com",
       "mails": [
         {
 

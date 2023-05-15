@@ -30,7 +30,7 @@ public class ServerConnection implements Runnable{
             }
         } catch (IOException e) {
             System.err.println("Server connection error: " + e.getMessage());
-        } /*Non sono sicuro di questa parte*/finally {
+        }finally {
             if (socket!=null)
                 try {
                     socket.close();

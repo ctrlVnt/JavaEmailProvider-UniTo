@@ -4,36 +4,56 @@ import com.riccardo.client.model.ClientModel;
 import com.riccardo.client.model.Email;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Objects;
 
 public class ClientConnection implements Runnable{
-
+    private final String mailbox;
     ObjectOutputStream outputStream = null;
     ObjectInputStream inputStream = null;
-
     ClientModel model;
+    private final String serverAddress;
+    private final int port;
+    private final String operation;
+    private Email deleted;
 
-    public ClientConnection(ClientModel model){
+    /*costruttore generale*/
+    public ClientConnection(ClientModel model, String user, String operation){
         this.model = model;
+        this.mailbox = user;
+        serverAddress = "localhost";
+        port = 4445;
+        this.operation = operation;
     }
-    private boolean tryCommunication(String host, int port){
+
+    /*costruttore per eliminare la mail*/
+    public ClientConnection(ClientModel model, String mail, String operation, Email deleted){
+        this.model = model;
+        this.mailbox = mail;
+        serverAddress = "localhost";
+        port = 4445;
+        this.operation = operation;
+        this.deleted = deleted;
+    }
+
+    /*prima connessione, invia al server il nome dell'utilizzatore e scarica la posta*/
+    private boolean firstComunication(String host, int port){
         try {
             Socket socket = new Socket(host, port);
 
             try {
+                outputStream = new ObjectOutputStream(socket.getOutputStream());
+                outputStream.flush();
                 inputStream = new ObjectInputStream(socket.getInputStream());
-                /*outputStream = new ObjectOutputStream(socket.getOutputStream());
+
+                outputStream.writeObject("firstConnection");
                 outputStream.flush();
 
-                String user = "Katherine Johnson";
-                outputStream.writeUTF(user);
-                outputStream.flush();*/
+                outputStream.writeObject(mailbox);
+                outputStream.flush();
 
                 List<Email> emails = (List<Email>) inputStream.readObject();
 
@@ -56,6 +76,36 @@ public class ClientConnection implements Runnable{
         }
     }
 
+    /*invia al server la mail che deve eliminare dal file json*/
+    private boolean deleteComunication(String host, int port){
+        try {
+            Socket socket = new Socket(host, port);
+
+            try {
+                outputStream = new ObjectOutputStream(socket.getOutputStream());
+                outputStream.flush();
+                //inputStream = new ObjectInputStream(socket.getInputStream());
+                outputStream.writeObject("deleteConnection");
+                outputStream.flush();
+
+                outputStream.writeObject(mailbox);
+                outputStream.flush();
+
+                outputStream.writeObject(deleted);
+                outputStream.flush();
+
+                return true;
+            } finally {
+                closeConnections();
+                socket.close();
+            }
+        } catch (IOException e) {
+            System.err.println("Connection error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    /*chiude le connessini*/
     private void closeConnections() {
         try {
             if(inputStream != null) {
@@ -72,23 +122,34 @@ public class ClientConnection implements Runnable{
 
     @Override
     public void run() {
-        /*inizio connessione server*/
-        String serverAddress = "localhost";
-        int port = 4445;
-        boolean success = false;
 
-        while(!success) {
-
-            success = tryCommunication(serverAddress, port);
-
-            if(success) {
-                continue;
+        if (Objects.equals(operation, "firstConnection"))
+        {
+            boolean success = false;
+            while (!success) {
+                success = firstComunication(serverAddress, port);
+                if (success) {
+                    continue;
+                }
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        }else if(Objects.equals(operation, "deleteMail"))
+        {
+            boolean success = false;
+            while (!success) {
+                success = deleteComunication(serverAddress, port);
+                if (success) {
+                    continue;
+                }
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
