@@ -6,6 +6,7 @@ import com.riccardo.client.model.EmailModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.TextFlow;
@@ -24,7 +25,7 @@ public class ComposeController{
     @FXML
     private TextField objectTextField;
     @FXML
-    private HTMLEditor messageEditor;
+    private TextArea messageEditor;
     @FXML
     private Button sendBtn;
     @FXML
@@ -50,13 +51,14 @@ public class ComposeController{
         senderTextField.textProperty().bind(email.emailAddressProperty());
         receivers.textProperty().bindBidirectional(email.receiversProperty());
         objectTextField.textProperty().bindBidirectional(email.subjectProperty());
-        messageEditor.setHtmlText(email.getText());
+        messageEditor.textProperty().bindBidirectional(email.textProperty());
 
         sendBtn.setOnMouseClicked(this::onSendButtonClick);
         cancelBtn.setOnMouseClicked(this::onCancelButtonClick);
     }
 
     private void onCancelButtonClick(MouseEvent mouseEvent) {
+        Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
 
@@ -74,9 +76,12 @@ public class ComposeController{
         Email email = new Email(senderTextField.getText(),
         receiversMail,
         objectTextField.getText(),
-        messageEditor.getHtmlText());
+        messageEditor.getText());
 
         Thread send = new Thread(new ClientConnection(sender, "sendMail", email, (ArrayList<String>) receiversMail));
         send.start();
+
+        Stage stage = (Stage) cancelBtn.getScene().getWindow();
+        stage.close();
     }
 }

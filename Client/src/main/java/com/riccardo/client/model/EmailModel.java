@@ -34,8 +34,8 @@ public class EmailModel {
         return subject;
     }
 
-    public String getText() {
-        return text.getValue();
+    public StringProperty textProperty() {
+        return text;
     }
 
     public void setSubject(String subject) {
