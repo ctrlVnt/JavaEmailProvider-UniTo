@@ -1,1 +1,8 @@
-{"users":[{"mails":[],"mail":"Katherine.johnson@unito.it"},{"mails":[{"subjects":"Teeest caora","from":"Katherine.johnson@unito.it","to":["doodo345@mymail.com"],"text":"capra ignorante"},{"subjects":"teeeest","from":"Katherine.johnson@unito.it","to":["doodo345@mymail.com"],"text":"Oh bobo, bonjour"},{"subjects":"test1","from":"Katherine.johnson@unito.it","to":["doodo345@mymail.com"],"text":"test"}],"mail":"doodo345@mymail.com"},{"mails":[],"mail":"hford@gmail.com"},{"mails":[],"mail":"riccardoventurini@yahoo.it"},{"mails":[],"mail":"francois.marshal@usmb.fr"}]}
+{"users":[
+  {"mails":[],"mail":"Katherine.johnson@unito.it"},
+  {"mails":[],"mail":"doodo345@mymail.com"},
+  {"mails":[],"mail":"hford@gmail.com"},
+  {"mails":[],"mail":"riccardoventurini@yahoo.it"},
+  {"mails":[],"mail":"francois.marshal@usmb.fr"}
+]
+}
