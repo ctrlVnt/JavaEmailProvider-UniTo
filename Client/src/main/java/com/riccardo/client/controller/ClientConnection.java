@@ -2,6 +2,7 @@ package com.riccardo.client.controller;
 
 import com.riccardo.client.model.ClientModel;
 import com.riccardo.client.model.Email;
+import javafx.application.Platform;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -207,6 +208,64 @@ public class ClientConnection implements Runnable{
                     e.printStackTrace();
                 }
             }
+        }else if(Objects.equals(operation, "checkNewMails"))
+        {
+            while (true) {
+
+                checkComunication(serverAddress, port);
+
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void checkComunication(String host, int port) {
+        try {
+            Socket socket = new Socket(host, port);
+
+            try {
+                outputStream = new ObjectOutputStream(socket.getOutputStream());
+                outputStream.flush();
+                inputStream = new ObjectInputStream(socket.getInputStream());
+
+                outputStream.writeObject("checkComunication");
+                outputStream.flush();
+
+                outputStream.writeObject(mailbox);
+                outputStream.flush();
+
+                System.out.println(model.getInboxNumber());
+                outputStream.writeObject(model.getInboxNumber());
+                outputStream.flush();
+
+                List<Email> emails = (List<Email>) inputStream.readObject();
+                System.out.println(emails);
+
+                /*if (emails != null && emails.size() > 0) {
+                    for (Email s : emails) {
+                        model.addInboxContent(s);
+                    }
+                }*/
+
+                //DEVO IMPLEMENTARE LA SINCRO DEI THREAD
+                Platform.runLater(() -> {
+                    if (emails != null && emails.size() > 0) {
+                        for (Email s : emails) {
+                            model.addInboxContent(s);
+                        }
+                    }
+                });
+
+            } finally {
+                closeConnections();
+                socket.close();
+            }
+        } catch (IOException | RuntimeException | ClassNotFoundException e) {
+            System.err.println("Connection error: " + e.getMessage());
         }
     }
 }

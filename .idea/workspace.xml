@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="I bottoni funzionano tutti, mancano i controlli sulle eccezioni, risposta a liste vuote etc...">
+    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="Tolto HTML editor, chiude le schede quando fai send o cancel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ComposeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ComposeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/EmailModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/EmailModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/riccardo/client/comp_message.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/riccardo/client/comp_message.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/ClientModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/ClientModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/MailLists.json" beforeDir="false" afterPath="$PROJECT_DIR$/Files/MailLists.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerOperations.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +156,7 @@
       <workItem from="1684133665409" duration="2058000" />
       <workItem from="1684135817377" duration="7398000" />
       <workItem from="1684147142708" duration="385000" />
-      <workItem from="1684225814772" duration="19146000" />
+      <workItem from="1684225814772" duration="22046000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1681642056980</created>
@@ -212,7 +214,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684250846786</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Tolto HTML editor, chiude le schede quando fai send o cancel">
+      <created>1684252265518</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1684252265518</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -237,6 +246,7 @@
     <MESSAGE value="Eliminazione di un elemento dal JSON" />
     <MESSAGE value="Iniziato invio messaggio" />
     <MESSAGE value="I bottoni funzionano tutti, mancano i controlli sulle eccezioni, risposta a liste vuote etc..." />
-    <option name="LAST_COMMIT_MESSAGE" value="I bottoni funzionano tutti, mancano i controlli sulle eccezioni, risposta a liste vuote etc..." />
+    <MESSAGE value="Tolto HTML editor, chiude le schede quando fai send o cancel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tolto HTML editor, chiude le schede quando fai send o cancel" />
   </component>
 </project>

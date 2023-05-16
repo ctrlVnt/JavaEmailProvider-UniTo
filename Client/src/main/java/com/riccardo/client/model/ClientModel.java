@@ -64,5 +64,9 @@ public class ClientModel {
     public void addInboxContent(Email email){
         inboxContent.add(email);
     }
+    public int getInboxNumber(){
+        return inbox.get().size();
+    }
+
 }
 

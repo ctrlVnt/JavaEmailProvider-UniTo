@@ -26,7 +26,7 @@ public class ServerOperations implements Runnable{
             String user = (String)inStream.readObject();
             controller.updateLog(user + "mails updated");
 
-            List<Email> emails = readJson(user);
+            List<Email> emails = readJson(user, 0);
 
             outStream.writeObject(emails);
             outStream.flush();
@@ -176,6 +176,8 @@ public class ServerOperations implements Runnable{
                 deleteConnection();
             }else if(Objects.equals(op, "sendConnection")){
                 sendConnection();
+            }else if(Objects.equals(op, "checkComunication")){
+                checkComunication();
             }
 
         } catch (IOException | ClassNotFoundException e) {
@@ -187,6 +189,22 @@ public class ServerOperations implements Runnable{
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    private void checkComunication() {
+        try {
+            String user = (String)inStream.readObject();
+
+            int number = (int)inStream.readObject();
+
+            List<Email> newEmails = readJson(user, number);
+
+            outStream.writeObject(newEmails);
+            outStream.flush();
+
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -211,7 +229,7 @@ public class ServerOperations implements Runnable{
         fileWriter.close();
     }
 
-    private List<Email> readJson(String name){
+    private List<Email> readJson(String name, int number){
         List<Email> inboxContent = new ArrayList<>();
 
         JSONParser parser = new JSONParser();
@@ -226,7 +244,7 @@ public class ServerOperations implements Runnable{
                 JSONObject user = (JSONObject) users.get(i);
                 if(Objects.equals(name, user.get("mail"))){
                     JSONArray mails = (JSONArray) user.get("mails");
-                    for (int j = 0; j < mails.size(); j++){
+                    for (int j = 0; j < mails.size()-number; j++){
                         JSONObject reademail = (JSONObject) mails.get(j);
                         Object toObj = reademail.get("to");
                         List<String> toList = null;

@@ -71,6 +71,9 @@ public class ClientController {
         emptyEmail = new Email("", List.of(""), "", "");
 
         updateDetailView(emptyEmail);
+
+        Thread checkNewMails = new Thread(new ClientConnection(model, user, "checkNewMails"));
+        checkNewMails.start();
     }
 
     /**
