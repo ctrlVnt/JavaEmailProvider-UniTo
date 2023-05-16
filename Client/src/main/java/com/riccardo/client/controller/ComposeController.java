@@ -4,8 +4,10 @@ import com.riccardo.client.model.ClientModel;
 import com.riccardo.client.model.Email;
 import com.riccardo.client.model.EmailModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.TextFlow;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
@@ -16,10 +18,6 @@ import java.util.List;
 public class ComposeController{
 
     @FXML
-    private TextFlow dangerAlert;
-    @FXML
-    private TextFlow successAlert;
-    @FXML
     private Label senderTextField;
     @FXML
     private TextField receivers;
@@ -27,36 +25,42 @@ public class ComposeController{
     private TextField objectTextField;
     @FXML
     private HTMLEditor messageEditor;
+    @FXML
+    private Button sendBtn;
+    @FXML
+    private Button cancelBtn;
 
     private Stage stage;
     private String sender;
     EmailModel email;
 
+    public ComposeController(String user) {
+        this.sender = user;
+    }
 
-    public void setModel(EmailModel model) {
+    public ComposeController() {
+    }
+
+    public void setModel(EmailModel email){
         this.email = email;
     }
-
-    public TextFlow getSuccessAlert() { return successAlert; }
-
-    public TextFlow getDangerAlert() { return dangerAlert; }
-
     @FXML
     public void initialize() throws InterruptedException {
-        if (this.email != null) {
-            throw new IllegalStateException("Model can only be initialized once");
-        }
-        email = new EmailModel("Katherine.johnson@unito.it");
+
         senderTextField.textProperty().bind(email.emailAddressProperty());
+        receivers.textProperty().bindBidirectional(email.receiversProperty());
+        objectTextField.textProperty().bindBidirectional(email.subjectProperty());
+        messageEditor.setHtmlText(email.getText());
+
+        sendBtn.setOnMouseClicked(this::onSendButtonClick);
+        cancelBtn.setOnMouseClicked(this::onCancelButtonClick);
     }
 
-    @FXML
-    public void onCancelButtonClick() {
+    private void onCancelButtonClick(MouseEvent mouseEvent) {
         stage.close();
     }
 
-    @FXML
-    public void onSendButtonClick() {
+    public void onSendButtonClick(MouseEvent mouseEvent) {
         String recipientsText = receivers.getText();
         String[] recipientEmails = recipientsText.split(",");
 

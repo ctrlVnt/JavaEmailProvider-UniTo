@@ -1,20 +1,20 @@
 package com.riccardo.client.model;
 
-import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class EmailModel {
 
     private final StringProperty sender;
-    private ListProperty<String> receivers;
+    private StringProperty receivers;
     private StringProperty subject;
     private StringProperty text;
 
     public EmailModel(String emailAddress) {
-
         this.sender = new SimpleStringProperty(emailAddress);
-
+        this.receivers = new SimpleStringProperty("");
+        this.subject = new SimpleStringProperty("");
+        this.text = new SimpleStringProperty("");
     }
 
     /**
@@ -26,4 +26,27 @@ public class EmailModel {
         return sender;
     }
 
+    public StringProperty receiversProperty() {
+        return receivers;
+    }
+
+    public StringProperty subjectProperty() {
+        return subject;
+    }
+
+    public String getText() {
+        return text.getValue();
+    }
+
+    public void setSubject(String subject) {
+        this.subject.set(subject);
+    }
+
+    public void setReceivers(String receivers) {
+        this.receivers.set(receivers);
+    }
+
+    public void setText(String text) {
+        this.text.set(text);
+    }
 }

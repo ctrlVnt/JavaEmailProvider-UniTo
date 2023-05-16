@@ -1,1 +1,8 @@
-{"users":[{"mails":[{"subjects":"A proposito della nostra ultima conversazione","from":"Alessandro","to":["me","Riccardo"],"text":"Ricordati di comprare il latte tornando a casa"},{"subjects":"What is Lorem Ipsum?","from":"Francesco","to":["me","Riccardo","Giulia","Gaia"],"text":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}],"mail":"Katherine.johnson@unito.it"},{"mails":[Katherine.johnson@unito.it - aaaaaaaaa,{"subjects":"Non dimenticare...","from":"Enrico","to":["me","Giulia","Gaia"],"text":"Ho sempre pensato valesse 42, tu sai di cosa parlo"}],"mail":"doodo345@mymail.com"},{"mails":[{}],"mail":"hford@gmail.com"}]}
+{"users":[
+  {"mails":[],"mail":"Katherine.johnson@unito.it"},
+  {"mails":[],"mail":"doodo345@mymail.com"},
+  {"mails":[],"mail":"hford@gmail.com"},
+  {"mails":[],"mail":"riccardoventurini@yahoo.it"},
+  {"mails":[],"mail":"francois.marshal@usmb.fr"}
+]
+}

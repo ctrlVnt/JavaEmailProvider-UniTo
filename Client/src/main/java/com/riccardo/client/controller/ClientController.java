@@ -112,7 +112,11 @@ public class ClientController {
      */
     @FXML
     protected void onReplyButtonClick() {
-        buildScene();
+        EmailModel email = new EmailModel(user);
+        email.setSubject("RE: " + selectedEmail.getSubject());
+        email.setReceivers(selectedEmail.getSender());
+        email.setText("--------------------------------------------------------" + selectedEmail.getText());
+        buildScene(email);
     }
 
     /**
@@ -120,7 +124,11 @@ public class ClientController {
      */
     @FXML
     protected void onReplyAtAllButtonClick() {
-        buildScene();
+        EmailModel email = new EmailModel(user);
+        email.setSubject("RE: " + selectedEmail.getSubject());
+        email.setReceivers(selectedEmail.getSender() + "," + selectedEmail.getReceivers().toString().replace(user, "").replace("[", "").replace("]", ""));
+        email.setText("--------------------------------------------------------" + selectedEmail.getText());
+        buildScene(email);
     }
 
     /**
@@ -128,24 +136,25 @@ public class ClientController {
      */
     @FXML
     protected void onForwardButtonClick() {
-        buildScene();
+        EmailModel email = new EmailModel(user);
+        email.setSubject("FW: " + selectedEmail.getSubject());
+        email.setText(selectedEmail.getText());
+        buildScene(email);
     }
     @FXML
     protected void writeButtonClick() {
-        buildScene();
+        EmailModel email = new EmailModel(user);
+        buildScene(email);
     }
 
-    private void buildScene(){
+    private void buildScene(EmailModel email){
         try {
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("comp_message.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 500, 500);
-
-            ComposeController composecontroller = new ComposeController();
+            ComposeController composecontroller = new ComposeController(user);
             fxmlLoader.setController(composecontroller);
-
-            /*EmailModel email = new EmailModel(user);
-            composecontroller.setModel(email);*/
+            composecontroller.setModel(email);
+            Scene scene = new Scene(fxmlLoader.load(), 615, 617);
 
             stage.setTitle("Write your mail");
             stage.setScene(scene);

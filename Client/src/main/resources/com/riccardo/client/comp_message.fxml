@@ -10,7 +10,7 @@
 <?import javafx.scene.text.TextFlow?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<AnchorPane prefHeight="615.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.riccardo.client.controller.ComposeController">
+<AnchorPane prefHeight="615.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <Label layoutX="9.0" layoutY="23.0" text="Sender:" AnchorPane.leftAnchor="4.0" />
     <Label layoutX="4.0" layoutY="65.0" text="To" AnchorPane.leftAnchor="4.0" />
     <Label layoutX="12.0" layoutY="111.0" prefHeight="17.0" prefWidth="46.0" text="Object:" AnchorPane.leftAnchor="4.0" />
@@ -18,7 +18,7 @@
     <TextField fx:id="receivers" layoutX="62.0" layoutY="61.0" prefHeight="25.0" prefWidth="540.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="13.0" />
     <TextField fx:id="objectTextField" layoutX="62.0" layoutY="107.0" prefHeight="25.0" prefWidth="540.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="13.0" />
     <HTMLEditor fx:id="messageEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body                         contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="10.0" layoutY="149.0" prefHeight="440.0" prefWidth="602.0" AnchorPane.bottomAnchor="103.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="149.0" />
-    <Button fx:id="cancelBtn" layoutX="14.0" layoutY="637.0" mnemonicParsing="false" onMouseClicked="#onCancelButtonClick" prefHeight="41.0" prefWidth="72.0" text="Cancel" AnchorPane.bottomAnchor="10.0">
+    <Button fx:id="cancelBtn" layoutX="14.0" layoutY="637.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="72.0" text="Cancel" AnchorPane.bottomAnchor="10.0">
         <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn-danger" />
@@ -28,7 +28,7 @@
             <Tooltip styleClass="tooltip-danger" text="Cancel and back to the main screen" />
         </tooltip>
     </Button>
-    <Button fx:id="sendBtn" layoutX="111.0" layoutY="637.0" mnemonicParsing="false" onMouseClicked="#onSendButtonClick" prefHeight="41.0" prefWidth="72.0" text="Send" AnchorPane.bottomAnchor="10.0">
+    <Button fx:id="sendBtn" layoutX="111.0" layoutY="637.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="72.0" text="Send" AnchorPane.bottomAnchor="10.0">
         <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn-success" />

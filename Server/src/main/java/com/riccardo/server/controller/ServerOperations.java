@@ -57,6 +57,7 @@ public class ServerOperations implements Runnable{
                     JSONArray mails = (JSONArray) user.get("mails");
                     Iterator<JSONObject> iterator = mails.iterator();
                     while (iterator.hasNext()) {
+                        System.out.println("intrappola");
                         JSONObject maildelete = iterator.next();
                         if((Objects.equals(deletemail.getText(), maildelete.get("text"))) &&
                             (Objects.equals(deletemail.getSubject(), maildelete.get("subjects"))) &&
@@ -79,10 +80,26 @@ public class ServerOperations implements Runnable{
         }
     }
 
-    private boolean checkReceivers(List<String> sender, Object to) {
-        if(sender.size() == 1){
-            if (Objects.equals(sender.get(0), to.toString())){
+    private boolean checkReceivers(List<String> receivers, Object to) {
+        if(receivers.size() == 1){
+            if (Objects.equals(receivers.get(0), to.toString())){
                 return true;
+            }
+        }else{
+            if (to instanceof List<?>) {
+                List<?> toList = (List<?>) to;
+                if (toList.size() == receivers.size()) {
+                    boolean allMatch = true;
+                    for (int i = 0; i < toList.size(); i++) {
+                        if (!Objects.equals(receivers.get(i), toList.get(i).toString())) {
+                            allMatch = false;
+                            break;
+                        }
+                    }
+                    if (allMatch) {
+                        return true;
+                    }
+                }
             }
         }
         return false;
@@ -93,6 +110,22 @@ public class ServerOperations implements Runnable{
             String usermailbox = (String) inStream.readObject();
             ArrayList<String> receivers = (ArrayList<String>) inStream.readObject();
             Email email = (Email) inStream.readObject();
+
+            JSONObject newEmail = new JSONObject();
+            newEmail.put("subjects", email.getSubject());
+            newEmail.put("from", email.getSender());
+            JSONArray toList = new JSONArray();
+            for (int tmp = 0; tmp < email.getReceivers().size(); tmp++){
+                if(tmp < email.getReceivers().size() - 1){
+                    toList.add(email.getReceivers().get(tmp) + ",");
+                }else{
+                    toList.add(email.getReceivers().get(tmp));
+                }
+
+            }
+            newEmail.put("to", toList);
+            newEmail.put("text", email.getText());
+
             controller.updateLog(usermailbox + " send mail");
 
             /*operazione sul JSON*/
@@ -111,7 +144,7 @@ public class ServerOperations implements Runnable{
                     if (Objects.equals(receivers.get(k), user.get("mail"))) {
                         found = true;
                         JSONArray mails = (JSONArray) user.get("mails");
-                        mails.add(0, email);
+                        mails.add(0, newEmail);
                     }
                 }
 
