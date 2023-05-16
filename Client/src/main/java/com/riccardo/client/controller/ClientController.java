@@ -1,17 +1,19 @@
 package com.riccardo.client.controller;
 
+import com.riccardo.client.Client;
 import com.riccardo.client.model.ClientModel;
 import com.riccardo.client.model.Email;
+import com.riccardo.client.model.EmailModel;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.List;
 
 public class ClientController {
@@ -37,9 +39,6 @@ public class ClientController {
     private ClientModel model;
     private Email selectedEmail;
     private Email emptyEmail;
-
-    ObjectOutputStream outputStream = null;
-    ObjectInputStream inputStream = null;
 
     private String user;
 
@@ -112,20 +111,47 @@ public class ClientController {
      * Risponde solo al mittente
      */
     @FXML
-    public void onReplyButtonClick(MouseEvent mouseEvent) {
+    protected void onReplyButtonClick() {
+        buildScene();
     }
 
     /**
      * Risponde al mittente e agli altri riceventi
      */
     @FXML
-    public void onReplyAtAllButtonClick(MouseEvent mouseEvent) {
+    protected void onReplyAtAllButtonClick() {
+        buildScene();
     }
 
     /**
      * Inoltra la mail
      */
     @FXML
-    public void onForwardButtonClick(MouseEvent mouseEvent) {
+    protected void onForwardButtonClick() {
+        buildScene();
+    }
+    @FXML
+    protected void writeButtonClick() {
+        buildScene();
+    }
+
+    private void buildScene(){
+        try {
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("comp_message.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 500, 500);
+
+            ComposeController composecontroller = new ComposeController();
+            fxmlLoader.setController(composecontroller);
+
+            /*EmailModel email = new EmailModel(user);
+            composecontroller.setModel(email);*/
+
+            stage.setTitle("Write your mail");
+            stage.setScene(scene);
+            stage.show();
+        }catch (IOException e1){
+            e1.printStackTrace();
+        }
     }
 }

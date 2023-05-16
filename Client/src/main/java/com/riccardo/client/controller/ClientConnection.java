@@ -7,18 +7,20 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class ClientConnection implements Runnable{
     private final String mailbox;
+    private ArrayList<String> receivers;
     ObjectOutputStream outputStream = null;
     ObjectInputStream inputStream = null;
     ClientModel model;
     private final String serverAddress;
     private final int port;
     private final String operation;
-    private Email deleted;
+    private Email mail;
 
     /*costruttore generale*/
     public ClientConnection(ClientModel model, String user, String operation){
@@ -36,7 +38,16 @@ public class ClientConnection implements Runnable{
         serverAddress = "localhost";
         port = 4445;
         this.operation = operation;
-        this.deleted = deleted;
+        this.mail = deleted;
+    }
+
+    public ClientConnection(String mail, String operation, Email tosend, ArrayList<String> receivers){
+        this.mailbox = mail;
+        serverAddress = "localhost";
+        port = 4445;
+        this.operation = operation;
+        this.mail = tosend;
+        this.receivers = receivers;
     }
 
     /*prima connessione, invia al server il nome dell'utilizzatore e scarica la posta*/
@@ -91,7 +102,38 @@ public class ClientConnection implements Runnable{
                 outputStream.writeObject(mailbox);
                 outputStream.flush();
 
-                outputStream.writeObject(deleted);
+                outputStream.writeObject(mail);
+                outputStream.flush();
+
+                return true;
+            } finally {
+                closeConnections();
+                socket.close();
+            }
+        } catch (IOException e) {
+            System.err.println("Connection error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private boolean sendComunication(String host, int port) {
+        try {
+            Socket socket = new Socket(host, port);
+
+            try {
+                outputStream = new ObjectOutputStream(socket.getOutputStream());
+                outputStream.flush();
+                //inputStream = new ObjectInputStream(socket.getInputStream());
+                outputStream.writeObject("sendConnection");
+                outputStream.flush();
+
+                outputStream.writeObject(mailbox);
+                outputStream.flush();
+
+                outputStream.writeObject(receivers);
+                outputStream.flush();
+
+                outputStream.writeObject(mail);
                 outputStream.flush();
 
                 return true;
@@ -142,6 +184,20 @@ public class ClientConnection implements Runnable{
             boolean success = false;
             while (!success) {
                 success = deleteComunication(serverAddress, port);
+                if (success) {
+                    continue;
+                }
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else if(Objects.equals(operation, "sendMail"))
+        {
+            boolean success = false;
+            while (!success) {
+                success = sendComunication(serverAddress, port);
                 if (success) {
                     continue;
                 }

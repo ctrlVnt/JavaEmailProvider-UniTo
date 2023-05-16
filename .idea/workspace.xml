@@ -4,14 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="Il server invia la lista delle mail al client">
+    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="Eliminazione di un elemento dal JSON">
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/EmailModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/ClientModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/ClientModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ComposeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ComposeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/Email.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/Email.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/riccardo/client/comp_message.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/riccardo/client/comp_message.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Files/MailLists.json" beforeDir="false" afterPath="$PROJECT_DIR$/Files/MailLists.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerOperations.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,6 +49,8 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ToolWindowGit.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-18&quot;,
@@ -153,7 +156,9 @@
       <workItem from="1684062140264" duration="8380000" />
       <workItem from="1684082190419" duration="11084000" />
       <workItem from="1684133665409" duration="2058000" />
-      <workItem from="1684135817377" duration="5135000" />
+      <workItem from="1684135817377" duration="7398000" />
+      <workItem from="1684147142708" duration="385000" />
+      <workItem from="1684225814772" duration="8362000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1681642056980</created>
@@ -190,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684086891793</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Eliminazione di un elemento dal JSON">
+      <created>1684141092729</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1684141092729</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,6 +224,7 @@
     <MESSAGE value="Update" />
     <MESSAGE value="Connection server" />
     <MESSAGE value="Il server invia la lista delle mail al client" />
-    <option name="LAST_COMMIT_MESSAGE" value="Il server invia la lista delle mail al client" />
+    <MESSAGE value="Eliminazione di un elemento dal JSON" />
+    <option name="LAST_COMMIT_MESSAGE" value="Eliminazione di un elemento dal JSON" />
   </component>
 </project>

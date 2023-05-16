@@ -42,7 +42,7 @@ public class ServerOperations implements Runnable{
             Email deletemail = (Email)inStream.readObject();
             controller.updateLog(usermailbox + " ask to delete mail");
 
-            /*parso il Json*/
+            /*operazione sul JSON*/
             JSONParser parser = new JSONParser();
             FileReader reader = new FileReader("Files/MailLists.json");
             Object obj = parser.parse(reader);
@@ -65,10 +65,7 @@ public class ServerOperations implements Runnable{
                         {
                             iterator.remove();
 
-                            FileWriter fileWriter = new FileWriter("Files/MailLists.json");
-                            fileWriter.write(jsonObject.toJSONString());
-                            fileWriter.flush();
-                            fileWriter.close();
+                            updateJSON(jsonObject);
 
                             System.out.println("mail deleted");
                             break;
@@ -91,6 +88,46 @@ public class ServerOperations implements Runnable{
         return false;
     }
 
+    private void sendConnection() {
+        try {
+            String usermailbox = (String) inStream.readObject();
+            ArrayList<String> receivers = (ArrayList<String>) inStream.readObject();
+            Email email = (Email) inStream.readObject();
+            controller.updateLog(usermailbox + " send mail");
+
+            /*operazione sul JSON*/
+            JSONParser parser = new JSONParser();
+            FileReader reader = new FileReader("Files/MailLists.json");
+            Object obj = parser.parse(reader);
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONArray users = (JSONArray) jsonObject.get("users");
+
+            for (int k = 0; k < receivers.size(); k++) {
+
+                boolean found = false;
+
+                for (int i = 0; i < users.size() && !found; i++) {
+                    JSONObject user = (JSONObject) users.get(i);
+                    if (Objects.equals(receivers.get(k), user.get("mail"))) {
+                        found = true;
+                        JSONArray mails = (JSONArray) user.get("mails");
+                        mails.add(0, email);
+                    }
+                }
+
+                if(!found){
+                    System.out.println("mail address don't found");
+                }
+            }
+
+            updateJSON(jsonObject);
+            System.out.println("emails sended");
+
+        }catch (IOException | ClassNotFoundException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void run() {
         try {
@@ -104,6 +141,8 @@ public class ServerOperations implements Runnable{
                 firstConnection();
             }else if(Objects.equals(op, "deleteConnection")){
                 deleteConnection();
+            }else if(Objects.equals(op, "sendConnection")){
+                sendConnection();
             }
 
         } catch (IOException | ClassNotFoundException e) {
@@ -130,6 +169,13 @@ public class ServerOperations implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void updateJSON( JSONObject jsonObject ) throws IOException {
+        FileWriter fileWriter = new FileWriter("Files/MailLists.json");
+        fileWriter.write(jsonObject.toJSONString());
+        fileWriter.flush();
+        fileWriter.close();
     }
 
     private List<Email> readJson(String name){

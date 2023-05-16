@@ -1,12 +1,17 @@
 package com.riccardo.client.controller;
 
+import com.riccardo.client.model.ClientModel;
+import com.riccardo.client.model.Email;
+import com.riccardo.client.model.EmailModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.TextFlow;
 import javafx.scene.web.HTMLEditor;
+import javafx.stage.Stage;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ComposeController{
 
@@ -15,81 +20,59 @@ public class ComposeController{
     @FXML
     private TextFlow successAlert;
     @FXML
-    private TextField senderTextField;
+    private Label senderTextField;
     @FXML
-    private TextField recipientsTextField;
+    private TextField receivers;
     @FXML
     private TextField objectTextField;
     @FXML
     private HTMLEditor messageEditor;
 
+    private Stage stage;
+    private String sender;
+    EmailModel email;
+
+
+    public void setModel(EmailModel model) {
+        this.email = email;
+    }
 
     public TextFlow getSuccessAlert() { return successAlert; }
 
     public TextFlow getDangerAlert() { return dangerAlert; }
 
-    public void onCancelButtonClick(MouseEvent mouseEvent) {
-    }
-
-
-    /*@FXML
-    public void initialize(){
-        senderTextField.setEditable(false);
-        senderTextField.setText(getUserEmail());
-    }
-
-
-    public TextField getSenderTextField() {
-        return senderTextField;
-    }
-
-    public TextField getRecipientsTextField() {
-        return recipientsTextField;
-    }
-
-    public TextField getObjectTextField() {
-        return objectTextField;
-    }
-
-    public HTMLEditor getMessageEditor() {
-        return messageEditor;
-    }
-
-
     @FXML
-    private void onCancelButtonClick() {
-        //clearing all fields
-        recipientsTextField.clear();
-        objectTextField.clear();
-        messageEditor.setHtmlText("");
-
-        ClientApp.sceneController.switchTo(SceneName.MAIN);
-    }
-
-
-    @FXML
-    private void onSendButtonClick() {
-        String[] recipientsArray = recipientsTextField.getText().split("\\s*,\\s*");
-        if (Arrays.stream(recipientsArray).allMatch(CommonUtil::validateEmail)){
-            Email email = new Email(senderTextField.getText(),
-                    new ArrayList<>(List.of(recipientsArray)),
-                    objectTextField.getText(), messageEditor.getHtmlText());
-
-            model.getClient().sendCmd(CommandName.SEND_EMAIL, email,
-                    ClientApp.sceneController.getController(SceneName.COMPOSE),
-                    (obj) -> Platform.runLater( () -> send(obj)), email);
-        } else {
-            AlertManager.showTemporizedAlert(dangerAlert, AlertText.INVALID_RECIPIENTS, 2);
+    public void initialize() throws InterruptedException {
+        if (this.email != null) {
+            throw new IllegalStateException("Model can only be initialized once");
         }
+        email = new EmailModel("Katherine.johnson@unito.it");
+        senderTextField.textProperty().bind(email.emailAddressProperty());
     }
 
+    @FXML
+    public void onCancelButtonClick() {
+        stage.close();
+    }
 
-    private void send(Object email){
-        model.addEmails(Collections.singletonList((Email) email));
-        //clearing all fields
-        recipientsTextField.clear();
-        objectTextField.clear();
-        messageEditor.setHtmlText("");
-        AlertManager.showSuccessSendMessage(AlertText.MESSAGE_SENT, 2);
-    }*/
+    @FXML
+    public void onSendButtonClick() {
+        String recipientsText = receivers.getText();
+        String[] recipientEmails = recipientsText.split(",");
+
+        List<String> receiversMail = new ArrayList<>();
+
+        for (String recipient : recipientEmails) {
+            String email = recipient.trim().toLowerCase();
+            receiversMail.add(email);
+        }
+
+        Email email = new Email(senderTextField.getText(),
+        receiversMail,
+        objectTextField.getText(),
+        messageEditor.getHtmlText());
+
+        Thread send = new Thread(new ClientConnection(sender, "sendMail", email, (ArrayList<String>) receiversMail));
+        send.start();
+    }
 }

@@ -1,5 +1,7 @@
 package com.riccardo.client.model;
 
+import javafx.beans.property.StringProperty;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,7 @@ public class Email implements Serializable {
     private String subject;
     private String text;
 
-    private Email() {}
+    public Email() {}
 
     /**
      * Costruttore della classe.
