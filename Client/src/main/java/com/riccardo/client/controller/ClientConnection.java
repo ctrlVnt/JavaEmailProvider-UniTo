@@ -238,12 +238,10 @@ public class ClientConnection implements Runnable{
                 outputStream.writeObject(mailbox);
                 outputStream.flush();
 
-                System.out.println(model.getInboxNumber());
                 outputStream.writeObject(model.getInboxNumber());
                 outputStream.flush();
 
                 List<Email> emails = (List<Email>) inputStream.readObject();
-                System.out.println(emails);
 
                 /*if (emails != null && emails.size() > 0) {
                     for (Email s : emails) {
@@ -251,7 +249,7 @@ public class ClientConnection implements Runnable{
                     }
                 }*/
 
-                //DEVO IMPLEMENTARE LA SINCRO DEI THREAD
+                //DEVO TROVARE UN ALTRO MODO PER FARLO
                 Platform.runLater(() -> {
                     if (emails != null && emails.size() > 0) {
                         for (Email s : emails) {

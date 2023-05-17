@@ -69,7 +69,7 @@ public class ComposeController{
         List<String> receiversMail = new ArrayList<>();
 
         for (String recipient : recipientEmails) {
-            String email = recipient.trim().toLowerCase();
+            String email = recipient.trim();
             receiversMail.add(email);
         }
 

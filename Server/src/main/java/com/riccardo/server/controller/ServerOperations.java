@@ -149,7 +149,7 @@ public class ServerOperations implements Runnable{
                 }
 
                 if(!found){
-                    System.out.println("mail address don't found");
+                    System.out.println("mail address doesn't found");
                 }
             }
 

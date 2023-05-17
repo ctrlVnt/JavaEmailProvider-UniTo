@@ -48,14 +48,14 @@ public class ClientController {
             throw new IllegalStateException("Model can only be initialized once");
         }
         //istanza nuovo client
-        user = "Katherine.johnson@unito.it";
+        user = "doodo345@mymail.com";
         model = new ClientModel(user);
 
         /*thread per connessione al server*/
-        Thread connection = new Thread(new ClientConnection(model, user, "firstConnection"));
+       /* Thread connection = new Thread(new ClientConnection(model, user, "firstConnection"));
         connection.start();
-        /*prima di caricare le mail aspetto che si colleghi*/
-        connection.join();
+
+        connection.join();*/
 
         selectedEmail = null;
 
