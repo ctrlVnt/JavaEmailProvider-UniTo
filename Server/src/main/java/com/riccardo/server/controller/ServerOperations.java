@@ -21,15 +21,16 @@ public class ServerOperations implements Runnable{
         this.controller = controller;
     }
 
+    /*VEDIAMO DI CANCELLARE QUESTO METODO*/
     private void firstConnection(){
         try {
             String user = (String)inStream.readObject();
-            controller.updateLog(user + "mails updated");
 
             List<Email> emails = readJson(user, 0);
 
             outStream.writeObject(emails);
             outStream.flush();
+            controller.updateLog(user + "mails updated");
 
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -57,7 +58,6 @@ public class ServerOperations implements Runnable{
                     JSONArray mails = (JSONArray) user.get("mails");
                     Iterator<JSONObject> iterator = mails.iterator();
                     while (iterator.hasNext()) {
-                        System.out.println("intrappola");
                         JSONObject maildelete = iterator.next();
                         if((Objects.equals(deletemail.getText(), maildelete.get("text"))) &&
                             (Objects.equals(deletemail.getSubject(), maildelete.get("subjects"))) &&

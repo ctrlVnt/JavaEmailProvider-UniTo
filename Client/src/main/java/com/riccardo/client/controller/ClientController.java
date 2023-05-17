@@ -48,7 +48,7 @@ public class ClientController {
             throw new IllegalStateException("Model can only be initialized once");
         }
         //istanza nuovo client
-        user = "doodo345@mymail.com";
+        user = "Katherine.johnson@unito.it";
         model = new ClientModel(user);
 
         /*thread per connessione al server*/

@@ -89,6 +89,7 @@ public class ClientConnection implements Runnable{
     }
 
     /*invia al server la mail che deve eliminare dal file json*/
+    /*QUESTA OPERAZIONE DEBE*/
     private boolean deleteComunication(String host, int port){
         try {
             Socket socket = new Socket(host, port);
@@ -96,7 +97,6 @@ public class ClientConnection implements Runnable{
             try {
                 outputStream = new ObjectOutputStream(socket.getOutputStream());
                 outputStream.flush();
-                //inputStream = new ObjectInputStream(socket.getInputStream());
                 outputStream.writeObject("deleteConnection");
                 outputStream.flush();
 
@@ -124,7 +124,6 @@ public class ClientConnection implements Runnable{
             try {
                 outputStream = new ObjectOutputStream(socket.getOutputStream());
                 outputStream.flush();
-                //inputStream = new ObjectInputStream(socket.getInputStream());
                 outputStream.writeObject("sendConnection");
                 outputStream.flush();
 
@@ -243,13 +242,6 @@ public class ClientConnection implements Runnable{
 
                 List<Email> emails = (List<Email>) inputStream.readObject();
 
-                /*if (emails != null && emails.size() > 0) {
-                    for (Email s : emails) {
-                        model.addInboxContent(s);
-                    }
-                }*/
-
-                //DEVO TROVARE UN ALTRO MODO PER FARLO
                 Platform.runLater(() -> {
                     if (emails != null && emails.size() > 0) {
                         for (Email s : emails) {

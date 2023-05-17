@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="Ripristino JSON">
+    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="Correzione bug lower case + poca roba">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ComposeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ComposeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/MailLists.json" beforeDir="false" afterPath="$PROJECT_DIR$/Files/MailLists.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerOperations.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -157,7 +157,9 @@
       <workItem from="1684147142708" duration="385000" />
       <workItem from="1684225814772" duration="22148000" />
       <workItem from="1684309930615" duration="1297000" />
-      <workItem from="1684315789998" duration="8691000" />
+      <workItem from="1684315789998" duration="8920000" />
+      <workItem from="1684327035703" duration="1219000" />
+      <workItem from="1684332200850" duration="1115000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1681642056980</created>
@@ -236,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684255227422</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Correzione bug lower case + poca roba">
+      <created>1684326305434</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1684326305434</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -264,6 +273,7 @@
     <MESSAGE value="Tolto HTML editor, chiude le schede quando fai send o cancel" />
     <MESSAGE value="Iniziato la parte del check mails, bloccato" />
     <MESSAGE value="Ripristino JSON" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ripristino JSON" />
+    <MESSAGE value="Correzione bug lower case + poca roba" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correzione bug lower case + poca roba" />
   </component>
 </project>
