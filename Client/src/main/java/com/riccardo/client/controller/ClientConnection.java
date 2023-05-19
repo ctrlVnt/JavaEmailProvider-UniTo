@@ -51,45 +51,8 @@ public class ClientConnection implements Runnable{
         this.receivers = receivers;
     }
 
-    /*prima connessione, invia al server il nome dell'utilizzatore e scarica la posta*/
-    private boolean firstComunication(String host, int port){
-        try {
-            Socket socket = new Socket(host, port);
-
-            try {
-                outputStream = new ObjectOutputStream(socket.getOutputStream());
-                outputStream.flush();
-                inputStream = new ObjectInputStream(socket.getInputStream());
-
-                outputStream.writeObject("firstConnection");
-                outputStream.flush();
-
-                outputStream.writeObject(mailbox);
-                outputStream.flush();
-
-                List<Email> emails = (List<Email>) inputStream.readObject();
-
-                if (emails != null && emails.size() > 0) {
-                    for (Email s : emails) {
-                        model.addInboxContent(s);
-                    }
-                }
-
-                return true;
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            } finally {
-                closeConnections();
-                socket.close();
-            }
-        } catch (IOException e) {
-            System.err.println("Connection error: " + e.getMessage());
-            return false;
-        }
-    }
-
     /*invia al server la mail che deve eliminare dal file json*/
-    /*QUESTA OPERAZIONE DEBE*/
+    /*QUESTA OPERAZIONE DEVE USARE SYNCHRO*/
     private boolean deleteComunication(String host, int port){
         try {
             Socket socket = new Socket(host, port);
@@ -165,21 +128,7 @@ public class ClientConnection implements Runnable{
     @Override
     public void run() {
 
-        if (Objects.equals(operation, "firstConnection"))
-        {
-            boolean success = false;
-            while (!success) {
-                success = firstComunication(serverAddress, port);
-                if (success) {
-                    continue;
-                }
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }else if(Objects.equals(operation, "deleteMail"))
+        if(Objects.equals(operation, "deleteMail"))
         {
             boolean success = false;
             while (!success) {

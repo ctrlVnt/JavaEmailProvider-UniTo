@@ -4,9 +4,12 @@ import com.riccardo.client.Client;
 import com.riccardo.client.model.ClientModel;
 import com.riccardo.client.model.Email;
 import com.riccardo.client.model.EmailModel;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -36,12 +39,22 @@ public class ClientController {
     @FXML
     private ListView<Email> lstEmails;
 
+    @FXML
+    private Button btnReply;
+    @FXML
+    private Button btnReplyatall;
+    @FXML
+    private Button btnForward;
+    @FXML
+    private Button btnDelete;
+
     private ClientModel model;
     private Email selectedEmail;
     private Email emptyEmail;
 
     private String user;
 
+    private BooleanProperty replyButtonDisabled = new SimpleBooleanProperty(true);
     @FXML
     public void initialize() throws InterruptedException {
         if (this.model != null) {
@@ -50,12 +63,6 @@ public class ClientController {
         //istanza nuovo client
         user = "Katherine.johnson@unito.it";
         model = new ClientModel(user);
-
-        /*thread per connessione al server*/
-       /* Thread connection = new Thread(new ClientConnection(model, user, "firstConnection"));
-        connection.start();
-
-        connection.join();*/
 
         selectedEmail = null;
 
@@ -72,6 +79,11 @@ public class ClientController {
 
         updateDetailView(emptyEmail);
 
+        btnReply.disableProperty().bind(replyButtonDisabled);
+        btnReplyatall.disableProperty().bind(replyButtonDisabled);
+        btnForward.disableProperty().bind(replyButtonDisabled);
+        btnDelete.disableProperty().bind(replyButtonDisabled);
+
         Thread checkNewMails = new Thread(new ClientConnection(model, user, "checkNewMails"));
         checkNewMails.start();
     }
@@ -83,6 +95,7 @@ public class ClientController {
         Email email = lstEmails.getSelectionModel().getSelectedItem();
         selectedEmail = email;
         updateDetailView(email);
+        replyButtonDisabled.set(selectedEmail == null);
     }
 
     /**
@@ -101,13 +114,12 @@ public class ClientController {
      * Elimina la mail selezionata
      */
     @FXML
-    protected void onDeleteButtonClick() throws InterruptedException {
-
+    protected void onDeleteButtonClick(){
         Thread deletemail = new Thread(new ClientConnection(model, user, "deleteMail", selectedEmail));
         deletemail.start();
-        /*Non aspetto l'eliminazione perché posso sempre aggiornare dopo*/
         model.deleteEmail(selectedEmail);
         updateDetailView(emptyEmail);
+        replyButtonDisabled.set(true);
     }
 
     /**
@@ -118,7 +130,7 @@ public class ClientController {
         EmailModel email = new EmailModel(user);
         email.setSubject("RE: " + selectedEmail.getSubject());
         email.setReceivers(selectedEmail.getSender());
-        email.setText("--------------------------------------------------------" + selectedEmail.getText());
+        email.setText("\n\n-----------------------------------------------------------------------------------------------------\n" + selectedEmail.getText());
         buildScene(email);
     }
 
@@ -130,7 +142,7 @@ public class ClientController {
         EmailModel email = new EmailModel(user);
         email.setSubject("RE: " + selectedEmail.getSubject());
         email.setReceivers(selectedEmail.getSender() + "," + selectedEmail.getReceivers().toString().replace(user, "").replace("[", "").replace("]", ""));
-        email.setText("--------------------------------------------------------" + selectedEmail.getText());
+        email.setText("\n\n-----------------------------------------------------------------------------------------------------\n" + selectedEmail.getText());
         buildScene(email);
     }
 

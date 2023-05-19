@@ -21,22 +21,6 @@ public class ServerOperations implements Runnable{
         this.controller = controller;
     }
 
-    /*VEDIAMO DI CANCELLARE QUESTO METODO*/
-    private void firstConnection(){
-        try {
-            String user = (String)inStream.readObject();
-
-            List<Email> emails = readJson(user, 0);
-
-            outStream.writeObject(emails);
-            outStream.flush();
-            controller.updateLog(user + "mails updated");
-
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private void deleteConnection(){
         try {
             String usermailbox = (String)inStream.readObject();
@@ -170,9 +154,7 @@ public class ServerOperations implements Runnable{
 
             String op = (String)inStream.readObject();
 
-            if(Objects.equals(op, "firstConnection")){
-                firstConnection();
-            }else if(Objects.equals(op, "deleteConnection")){
+            if(Objects.equals(op, "deleteConnection")){
                 deleteConnection();
             }else if(Objects.equals(op, "sendConnection")){
                 sendConnection();
