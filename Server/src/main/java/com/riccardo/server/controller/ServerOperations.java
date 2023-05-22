@@ -42,13 +42,10 @@ public class ServerOperations implements Runnable{
                     Iterator<JSONObject> iterator = mails.iterator();
                     while (iterator.hasNext()) {
                         JSONObject maildelete = iterator.next();
-                        if((Objects.equals(deletemail.getText(), maildelete.get("text"))) &&
-                            (Objects.equals(deletemail.getSubject(), maildelete.get("subjects"))) &&
-                            (Objects.equals(deletemail.getSender(), maildelete.get("from"))) &&
-                            checkReceivers(deletemail.getReceivers(), maildelete.get("to")))
+                        if(Objects.equals(deletemail.getId(), maildelete.get("id")))
                         {
                             iterator.remove();
-
+                            System.out.println("OK");
                             updateJSON(jsonObject);
                             break;
                         }
@@ -61,7 +58,7 @@ public class ServerOperations implements Runnable{
         }
     }
 
-    private boolean checkReceivers(List<String> receivers, Object to) {
+    /*private boolean checkReceivers(List<String> receivers, Object to) {
         if(receivers.size() == 1){
             if (Objects.equals(receivers.get(0), to.toString())){
                 return true;
@@ -84,7 +81,7 @@ public class ServerOperations implements Runnable{
             }
         }
         return false;
-    }
+    }*/
 
     private void sendConnection() {
         try {
@@ -96,7 +93,6 @@ public class ServerOperations implements Runnable{
             ArrayList<String> toListNotFound = new ArrayList<>();
 
             JSONObject newEmail = new JSONObject();
-            newEmail.put("id", 0);
             newEmail.put("subjects", email.getSubject());
             newEmail.put("from", email.getSender());
             JSONArray toList = new JSONArray();
@@ -119,8 +115,21 @@ public class ServerOperations implements Runnable{
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray users = (JSONArray) jsonObject.get("users");
 
-            int found = 0;
+            long newId = 0;
+            for (int i = 0; i < users.size(); i++) {
+                JSONObject user = (JSONObject) users.get(i);
+                JSONArray mails = (JSONArray) user.get("mails");
 
+                for (int j = 0; j < mails.size(); j++) {
+                    JSONObject mail = (JSONObject) mails.get(j);
+                    long mailId = (Long) mail.get("id");
+                    newId = Math.max(newId, mailId);
+                }
+            }
+            newId += 1;
+            newEmail.put("id", newId);
+
+            int found = 0;
             for (int k = 0; k < receivers.size(); k++) {
 
                 for (int i = 0; i < users.size(); i++) {

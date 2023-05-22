@@ -156,7 +156,7 @@ public class ClientController {
     protected void onForwardButtonClick() {
         EmailModel email = new EmailModel(user);
         email.setSubject("FW: " + selectedEmail.getSubject());
-        email.setText(selectedEmail.getText());
+        email.setText("\n\n----------------Message forwarded------------------\n" + "from: " + selectedEmail.getSender() +"\n" + "to: " + selectedEmail.getReceivers() + "\n\n" + selectedEmail.getText());
         buildScene(email);
     }
     @FXML

@@ -18,7 +18,7 @@ public class Email implements Serializable {
     private String subject;
     private String text;
     private String date;
-    private int id;
+    private long id;
 
     public Email() {}
 
@@ -84,7 +84,7 @@ public class Email implements Serializable {
     }
 
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -92,7 +92,7 @@ public class Email implements Serializable {
         return date;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

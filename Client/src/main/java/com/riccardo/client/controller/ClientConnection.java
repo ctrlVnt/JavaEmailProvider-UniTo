@@ -218,7 +218,7 @@ public class ClientConnection implements Runnable{
         try {
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("new_mail.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 200, 300);
+            Scene scene = new Scene(fxmlLoader.load(), 300, 200);
 
             stage.setTitle("New mail !!!");
             stage.setScene(scene);

@@ -16,23 +16,14 @@
             <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="765.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="439.0" />
-                  <Text fx:id="server_text" styleClass="log-title" text="Server" />
+                  <Text styleClass="log-title" text="Server" />
                   <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="439.0" />
-                  <ImageView fx:id="refresh" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/server.png" />
                      </image>
                   </ImageView>
                   <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="1014.0" />
-                  <ImageView fitHeight="36.0" fitWidth="32.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/refresh.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
-                  <HBox prefHeight="98.0" prefWidth="443.0" />
                </children>
                <opaqueInsets>
                   <Insets />

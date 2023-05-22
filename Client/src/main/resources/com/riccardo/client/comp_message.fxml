@@ -39,8 +39,9 @@
         </tooltip>
     </Button>
 
-    <TextFlow fx:id="dangerAlert" layoutX="830.0" layoutY="660.0" prefHeight="43.0" prefWidth="243.0" style="-fx-fill: red;" styleClass="alert, alert-danger" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
-        <Text text="" wrappingWidth="249.82421875" />
+    <TextFlow fx:id="dangerAlert" layoutX="830.0" layoutY="660.0" prefHeight="43.0" prefWidth="243.0" styleClass="alert" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+        <Text text="" wrappingWidth="249.82421875" style="-fx-fill: red;" />
     </TextFlow>
+
 
 </AnchorPane>
