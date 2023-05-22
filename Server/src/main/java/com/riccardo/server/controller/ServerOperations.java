@@ -25,7 +25,6 @@ public class ServerOperations implements Runnable{
         try {
             String usermailbox = (String)inStream.readObject();
             Email deletemail = (Email)inStream.readObject();
-            controller.updateLog(usermailbox + " ask to delete mail");
 
             /*operazione sul JSON*/
             JSONParser parser = new JSONParser();
@@ -37,7 +36,7 @@ public class ServerOperations implements Runnable{
             for (int i = 0; i < users.size(); i++)
             {
                 JSONObject user = (JSONObject) users.get(i);
-                if(Objects.equals(usermailbox, user.get("mail")))
+                if(Objects.equals(usermailbox, user.get("id")))
                 {
                     JSONArray mails = (JSONArray) user.get("mails");
                     Iterator<JSONObject> iterator = mails.iterator();
@@ -51,14 +50,12 @@ public class ServerOperations implements Runnable{
                             iterator.remove();
 
                             updateJSON(jsonObject);
-
-                            System.out.println("mail deleted");
                             break;
                         }
                     }
                 }
             }
-
+            controller.updateLog(usermailbox + "--> mail id : deleted");
         } catch (IOException | ClassNotFoundException | ParseException e) {
             throw new RuntimeException(e);
         }
@@ -95,6 +92,9 @@ public class ServerOperations implements Runnable{
             ArrayList<String> receivers = (ArrayList<String>) inStream.readObject();
             Email email = (Email) inStream.readObject();
 
+            HashMap<String, Boolean> recFound = new HashMap<>();
+            ArrayList<String> toListNotFound = new ArrayList<>();
+
             JSONObject newEmail = new JSONObject();
             newEmail.put("subjects", email.getSubject());
             newEmail.put("from", email.getSender());
@@ -105,12 +105,10 @@ public class ServerOperations implements Runnable{
                 }else{
                     toList.add(email.getReceivers().get(tmp));
                 }
-
+                recFound.put(email.getReceivers().get(tmp), false);
             }
             newEmail.put("to", toList);
             newEmail.put("text", email.getText());
-
-            controller.updateLog(usermailbox + " send mail");
 
             /*operazione sul JSON*/
             JSONParser parser = new JSONParser();
@@ -119,26 +117,43 @@ public class ServerOperations implements Runnable{
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray users = (JSONArray) jsonObject.get("users");
 
+            int found = 0;
+
             for (int k = 0; k < receivers.size(); k++) {
 
-                boolean found = false;
-
-                for (int i = 0; i < users.size() && !found; i++) {
+                for (int i = 0; i < users.size(); i++) {
                     JSONObject user = (JSONObject) users.get(i);
-                    if (Objects.equals(receivers.get(k), user.get("mail"))) {
-                        found = true;
+                    if (Objects.equals(receivers.get(k), user.get("id"))) {
+                        found+=1;
+                        recFound.replace(receivers.get(k), true);
                         JSONArray mails = (JSONArray) user.get("mails");
                         mails.add(0, newEmail);
                     }
                 }
 
-                if(!found){
-                    System.out.println("mail address doesn't found");
+            }
+            if(found < users.size() - 1){
+                controller.updateLog(usermailbox + "--> ERROR: mail id doesn't exist");
+
+                for (int i = 0; i < receivers.size(); i++) {
+                    if (!recFound.get(receivers.get(i))) {
+                        toListNotFound.add(recFound.get(receivers.get(i)).toString());
+                    }
+                }
+
+                newEmail.put("SERVER MESSAGE ERROR: clients " + newEmail.get("receivers") + toListNotFound + "not found", newEmail.get("text"));
+
+                for (int i = 0; i < users.size(); i++) {
+                    JSONObject user = (JSONObject) users.get(i);
+                    if (Objects.equals(usermailbox, user.get("id"))) {
+                        JSONArray mails = (JSONArray) user.get("mails");
+                        mails.add(0, newEmail);
+                        break;
+                    }
                 }
             }
-
             updateJSON(jsonObject);
-            System.out.println("emails sended");
+            controller.updateLog(usermailbox + "--> mail id : sended");
 
         }catch (IOException | ClassNotFoundException | ParseException e) {
             throw new RuntimeException(e);
@@ -185,6 +200,8 @@ public class ServerOperations implements Runnable{
             outStream.writeObject(newEmails);
             outStream.flush();
 
+            controller.updateLog(user + "--> mail checked");
+
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -224,7 +241,7 @@ public class ServerOperations implements Runnable{
             JSONArray users = (JSONArray) jsonObject.get("users");
             for (int i = 0; i < users.size(); i++){
                 JSONObject user = (JSONObject) users.get(i);
-                if(Objects.equals(name, user.get("mail"))){
+                if(Objects.equals(name, user.get("id"))){
                     JSONArray mails = (JSONArray) user.get("mails");
                     for (int j = 0; j < mails.size()-number; j++){
                         JSONObject reademail = (JSONObject) mails.get(j);

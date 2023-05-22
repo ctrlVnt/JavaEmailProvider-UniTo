@@ -41,10 +41,13 @@ public class ClientController {
 
     @FXML
     private Button btnReply;
+
     @FXML
     private Button btnReplyatall;
+
     @FXML
     private Button btnForward;
+
     @FXML
     private Button btnDelete;
 

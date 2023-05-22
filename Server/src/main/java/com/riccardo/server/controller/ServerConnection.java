@@ -23,16 +23,16 @@ public class ServerConnection implements Runnable{
             System.out.println("Server listening on port " + port);
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                controller.updateLog("New connection from " + clientSocket.getInetAddress().getHostAddress());
-
                 Thread serverOperations = new Thread(new ServerOperations(clientSocket, controller));
                 serverOperations.start();
             }
         } catch (IOException e) {
+            controller.updateLog("Server connection error: " + e.getMessage());
             System.err.println("Server connection error: " + e.getMessage());
         }finally {
             if (socket!=null)
                 try {
+                    controller.updateLog("Socket closure successful");
                     socket.close();
                 } catch (IOException e) {
                     e.printStackTrace();

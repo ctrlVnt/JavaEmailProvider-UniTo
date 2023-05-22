@@ -16,16 +16,20 @@ public class Email implements Serializable {
     private List<String> receivers;
     private String subject;
     private String text;
+    private String date;
+    private String id;
 
     public Email() {}
 
     /**
      * Costruttore della classe.
      *
+     * //@param id         id email
      * @param sender     email del mittente
      * @param receivers  emails dei destinatari
      * @param subject    oggetto della mail
      * @param text       testo della mail
+     * //@param date       ora invio mail (secondo ricezione server)
      */
 
 
@@ -34,6 +38,8 @@ public class Email implements Serializable {
         this.subject = subject;
         this.text = text;
         this.receivers = new ArrayList<>(receivers);
+        this.date = null;
+        this.id = null;
     }
 
     public String getSender() {
@@ -50,6 +56,14 @@ public class Email implements Serializable {
 
     public String getText() {
         return text;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     /**
