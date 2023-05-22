@@ -4,6 +4,7 @@ import javafx.beans.property.StringProperty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,19 +18,17 @@ public class Email implements Serializable {
     private String subject;
     private String text;
     private String date;
-    private String id;
+    private int id;
 
     public Email() {}
 
     /**
      * Costruttore della classe.
      *
-     * //@param id         id email
      * @param sender     email del mittente
      * @param receivers  emails dei destinatari
      * @param subject    oggetto della mail
      * @param text       testo della mail
-     * //@param date       ora invio mail (secondo ricezione server)
      */
 
 
@@ -38,8 +37,25 @@ public class Email implements Serializable {
         this.subject = subject;
         this.text = text;
         this.receivers = new ArrayList<>(receivers);
-        this.date = null;
-        this.id = null;
+    }
+
+    /**
+     * Costruttore della classe.
+     *
+     * @param id         id email
+     * @param sender     email del mittente
+     * @param receivers  emails dei destinatari
+     * @param subject    oggetto della mail
+     * @param text       testo della mail
+     * @param date       ora invio mail (secondo ricezione server)
+     */
+    public Email(int id, String sender, List<String> receivers, String subject, String text, String date) {
+        this.sender = sender;
+        this.subject = subject;
+        this.text = text;
+        this.receivers = new ArrayList<>(receivers);
+        this.date = date;
+        this.id = id;
     }
 
     public String getSender() {
@@ -58,12 +74,30 @@ public class Email implements Serializable {
         return text;
     }
 
-    public String getId() {
+    public String getTextTab() {
+        String[] lines = text.split("\n");
+        StringBuilder tabbedText = new StringBuilder();
+        for (String line : lines) {
+            tabbedText.append("\t").append(line).append("\n");
+        }
+        return tabbedText.toString();
+    }
+
+
+    public int getId() {
         return id;
     }
 
     public String getDate() {
         return date;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     /**

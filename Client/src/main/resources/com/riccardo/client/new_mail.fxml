@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<BorderPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.riccardo.client.controller.NotifController">
+   <center>
+      <Text fx:id="newMailText" strokeType="OUTSIDE" strokeWidth="0.0" text="There are new mail !" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+   </center>
+   <bottom>
+      <Button fx:id="btnOk" mnemonicParsing="false" onAction="#closeWindow" text="OK" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="20.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
+</BorderPane>

@@ -96,6 +96,7 @@ public class ServerOperations implements Runnable{
             ArrayList<String> toListNotFound = new ArrayList<>();
 
             JSONObject newEmail = new JSONObject();
+            newEmail.put("id", 0);
             newEmail.put("subjects", email.getSubject());
             newEmail.put("from", email.getSender());
             JSONArray toList = new JSONArray();
@@ -109,6 +110,7 @@ public class ServerOperations implements Runnable{
             }
             newEmail.put("to", toList);
             newEmail.put("text", email.getText());
+            newEmail.put("date", new Date().toString());
 
             /*operazione sul JSON*/
             JSONParser parser = new JSONParser();
@@ -132,14 +134,15 @@ public class ServerOperations implements Runnable{
                 }
 
             }
-            if(found < users.size() - 1){
+            if(found < receivers.size()){
                 controller.updateLog(usermailbox + "--> ERROR: mail id doesn't exist");
 
                 for (int i = 0; i < receivers.size(); i++) {
                     if (!recFound.get(receivers.get(i))) {
-                        toListNotFound.add(recFound.get(receivers.get(i)).toString());
+                        toListNotFound.add(receivers.get(i));
                     }
                 }
+
 
                 newEmail.put("SERVER MESSAGE ERROR: clients " + newEmail.get("receivers") + toListNotFound + "not found", newEmail.get("text"));
 
@@ -261,11 +264,13 @@ public class ServerOperations implements Runnable{
                                 }
                             }
                         }
+
                         Email email = new Email(
                                 reademail.get("from").toString(),
                                 toList,
                                 reademail.get("subjects").toString(),
-                                reademail.get("text").toString());
+                                (reademail.get("text").toString() + "\n" + reademail.get("date").toString()));
+
                         inboxContent.add(email);
                     }
                 }

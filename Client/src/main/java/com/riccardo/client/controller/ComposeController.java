@@ -9,8 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -30,6 +30,8 @@ public class ComposeController{
     private Button sendBtn;
     @FXML
     private Button cancelBtn;
+    @FXML
+    private TextFlow dangerAlert;
 
     private Stage stage;
     private String sender;
@@ -70,13 +72,24 @@ public class ComposeController{
 
         for (String recipient : recipientEmails) {
             String email = recipient.trim();
+            if (!email.contains("@")) {
+                dangerAlert.setVisible(true);
+                Text errorMessage = (Text) dangerAlert.getChildren().get(0);
+                errorMessage.setText("Indirizzo mail non valido");
+                return;
+            }
             receiversMail.add(email);
         }
 
-        Email email = new Email(senderTextField.getText(),
-        receiversMail,
-        objectTextField.getText(),
-        messageEditor.getText());
+        if (objectTextField.getText() == null) {
+            objectTextField.setText("[object empty]");
+        }
+
+        Email email = new Email(
+                senderTextField.getText(),
+                receiversMail,
+                objectTextField.getText(),
+                messageEditor.getText());
 
         Thread send = new Thread(new ClientConnection(sender, "sendMail", email, (ArrayList<String>) receiversMail));
         send.start();
@@ -84,4 +97,6 @@ public class ComposeController{
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
+
+
 }

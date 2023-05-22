@@ -3,13 +3,13 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<?import javafx.scene.control.TextArea?>
 <AnchorPane prefHeight="615.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <Label layoutX="9.0" layoutY="23.0" text="Sender:" AnchorPane.leftAnchor="4.0" />
     <Label layoutX="4.0" layoutY="65.0" text="To" AnchorPane.leftAnchor="4.0" />
@@ -39,11 +39,8 @@
         </tooltip>
     </Button>
 
-    <TextFlow fx:id="dangerAlert" layoutX="830.0" layoutY="660.0" prefHeight="43.0" prefWidth="243.0" styleClass="alert, alert-danger" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+    <TextFlow fx:id="dangerAlert" layoutX="830.0" layoutY="660.0" prefHeight="43.0" prefWidth="243.0" style="-fx-fill: red;" styleClass="alert, alert-danger" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
         <Text text="" wrappingWidth="249.82421875" />
-    </TextFlow>
-    <TextFlow fx:id="successAlert" layoutX="250.0" layoutY="190.0" prefHeight="40.0" prefWidth="205.0" styleClass="alert alert-success" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Message sent with success" />
     </TextFlow>
 
 </AnchorPane>

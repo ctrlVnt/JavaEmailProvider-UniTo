@@ -1,8 +1,13 @@
 package com.riccardo.client.controller;
 
+import com.riccardo.client.Client;
 import com.riccardo.client.model.ClientModel;
 import com.riccardo.client.model.Email;
+import com.riccardo.client.model.EmailModel;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -193,6 +198,7 @@ public class ClientConnection implements Runnable{
 
                 Platform.runLater(() -> {
                     if (emails != null && emails.size() > 0) {
+                        buildNotif();
                         for (Email s : emails) {
                             model.addInboxContent(s);
                         }
@@ -205,6 +211,20 @@ public class ClientConnection implements Runnable{
             }
         } catch (IOException | RuntimeException | ClassNotFoundException e) {
             System.err.println("Connection error: " + e.getMessage());
+        }
+    }
+
+    private void buildNotif(){
+        try {
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("new_mail.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 200, 300);
+
+            stage.setTitle("New mail !!!");
+            stage.setScene(scene);
+            stage.show();
+        }catch (IOException e1){
+            e1.printStackTrace();
         }
     }
 }
