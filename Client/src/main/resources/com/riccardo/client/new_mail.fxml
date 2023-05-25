@@ -9,7 +9,7 @@
 
 <BorderPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.riccardo.client.controller.NotifController">
    <center>
-      <Text fx:id="newMailText" strokeType="OUTSIDE" strokeWidth="0.0" text="There are new mail !" BorderPane.alignment="CENTER">
+      <Text fx:id="newMailText" strokeType="OUTSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>

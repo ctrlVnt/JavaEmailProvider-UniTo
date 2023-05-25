@@ -21,7 +21,7 @@ public class ServerOperations implements Runnable{
         this.controller = controller;
     }
 
-    private void deleteConnection(){
+    private synchronized void deleteConnection(){
         try {
             String usermailbox = (String)inStream.readObject();
             Email deletemail = (Email)inStream.readObject();
@@ -45,45 +45,19 @@ public class ServerOperations implements Runnable{
                         if(Objects.equals(deletemail.getId(), maildelete.get("id")))
                         {
                             iterator.remove();
-                            System.out.println("OK");
+                            controller.updateLog(usermailbox + "--> mail id : deleted");
                             updateJSON(jsonObject);
                             break;
                         }
                     }
                 }
             }
-            controller.updateLog(usermailbox + "--> mail id : deleted");
         } catch (IOException | ClassNotFoundException | ParseException e) {
             throw new RuntimeException(e);
         }
     }
 
-    /*private boolean checkReceivers(List<String> receivers, Object to) {
-        if(receivers.size() == 1){
-            if (Objects.equals(receivers.get(0), to.toString())){
-                return true;
-            }
-        }else{
-            if (to instanceof List<?>) {
-                List<?> toList = (List<?>) to;
-                if (toList.size() == receivers.size()) {
-                    boolean allMatch = true;
-                    for (int i = 0; i < toList.size(); i++) {
-                        if (!Objects.equals(receivers.get(i), toList.get(i).toString())) {
-                            allMatch = false;
-                            break;
-                        }
-                    }
-                    if (allMatch) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }*/
-
-    private void sendConnection() {
+    private synchronized void sendConnection() {
         try {
             String usermailbox = (String) inStream.readObject();
             ArrayList<String> receivers = (ArrayList<String>) inStream.readObject();
@@ -279,6 +253,8 @@ public class ServerOperations implements Runnable{
                                 toList,
                                 reademail.get("subjects").toString(),
                                 (reademail.get("text").toString() + "\n" + reademail.get("date").toString()));
+
+                        email.setId((long)reademail.get("id"));
 
                         inboxContent.add(email);
                     }

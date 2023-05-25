@@ -3,7 +3,6 @@ package com.riccardo.client.controller;
 import com.riccardo.client.Client;
 import com.riccardo.client.model.ClientModel;
 import com.riccardo.client.model.Email;
-import com.riccardo.client.model.EmailModel;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -57,7 +56,6 @@ public class ClientConnection implements Runnable{
     }
 
     /*invia al server la mail che deve eliminare dal file json*/
-    /*QUESTA OPERAZIONE DEVE USARE SYNCHRO*/
     private boolean deleteComunication(String host, int port){
         try {
             Socket socket = new Socket(host, port);
@@ -130,6 +128,61 @@ public class ClientConnection implements Runnable{
         }
     }
 
+    private void checkComunication(String host, int port) {
+        try {
+            Socket socket = new Socket(host, port);
+
+            try {
+                outputStream = new ObjectOutputStream(socket.getOutputStream());
+                outputStream.flush();
+                inputStream = new ObjectInputStream(socket.getInputStream());
+
+                outputStream.writeObject("checkComunication");
+                outputStream.flush();
+
+                outputStream.writeObject(mailbox);
+                outputStream.flush();
+
+                outputStream.writeObject(model.getInboxNumber());
+                outputStream.flush();
+
+                List<Email> emails = (List<Email>) inputStream.readObject();
+
+                Platform.runLater(() -> {
+                    if (emails != null && emails.size() > 0) {
+                        buildNotif(emails.size());
+                        for (Email s : emails) {
+                            model.addInboxContent(s);
+                        }
+                    }
+                });
+
+            } finally {
+                closeConnections();
+                socket.close();
+            }
+        } catch (IOException | RuntimeException | ClassNotFoundException e) {
+            System.err.println("Connection error: " + e.getMessage());
+        }
+    }
+
+    private void buildNotif(int nmail){
+        try {
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("new_mail.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 300, 200);
+
+            NotifController controller = fxmlLoader.getController();
+            controller.setNmail(nmail);
+
+            stage.setTitle("New mail!!!");
+            stage.setScene(scene);
+            stage.show();
+        }catch (IOException e1){
+            e1.printStackTrace();
+        }
+    }
+
     @Override
     public void run() {
 
@@ -173,58 +226,6 @@ public class ClientConnection implements Runnable{
                     e.printStackTrace();
                 }
             }
-        }
-    }
-
-    private void checkComunication(String host, int port) {
-        try {
-            Socket socket = new Socket(host, port);
-
-            try {
-                outputStream = new ObjectOutputStream(socket.getOutputStream());
-                outputStream.flush();
-                inputStream = new ObjectInputStream(socket.getInputStream());
-
-                outputStream.writeObject("checkComunication");
-                outputStream.flush();
-
-                outputStream.writeObject(mailbox);
-                outputStream.flush();
-
-                outputStream.writeObject(model.getInboxNumber());
-                outputStream.flush();
-
-                List<Email> emails = (List<Email>) inputStream.readObject();
-
-                Platform.runLater(() -> {
-                    if (emails != null && emails.size() > 0) {
-                        buildNotif();
-                        for (Email s : emails) {
-                            model.addInboxContent(s);
-                        }
-                    }
-                });
-
-            } finally {
-                closeConnections();
-                socket.close();
-            }
-        } catch (IOException | RuntimeException | ClassNotFoundException e) {
-            System.err.println("Connection error: " + e.getMessage());
-        }
-    }
-
-    private void buildNotif(){
-        try {
-            Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("new_mail.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 300, 200);
-
-            stage.setTitle("New mail !!!");
-            stage.setScene(scene);
-            stage.show();
-        }catch (IOException e1){
-            e1.printStackTrace();
         }
     }
 }

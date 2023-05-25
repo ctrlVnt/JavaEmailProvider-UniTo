@@ -13,6 +13,10 @@ public class NotifController {
     @FXML
     private Button btnOk;
 
+    public void setNmail(int n){
+        newMailText.setText("There are " + n + " new mail !");
+    }
+
     public void closeWindow(ActionEvent actionEvent) {
         Stage stage = (Stage) btnOk.getScene().getWindow();
         stage.close();

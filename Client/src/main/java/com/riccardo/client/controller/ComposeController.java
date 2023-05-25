@@ -1,6 +1,5 @@
 package com.riccardo.client.controller;
 
-import com.riccardo.client.model.ClientModel;
 import com.riccardo.client.model.Email;
 import com.riccardo.client.model.EmailModel;
 import javafx.fxml.FXML;
