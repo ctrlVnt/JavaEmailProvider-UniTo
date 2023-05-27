@@ -162,7 +162,7 @@ public class ClientController {
     protected void onReplyAtAllButtonClick() {
         EmailModel email = new EmailModel(user);
         email.setSubject("RE: " + selectedEmail.getSubject());
-        email.setReceivers(selectedEmail.getSender() + selectedEmail.getReceivers().toString().replace(user, "").replace("[", "").replace("]", ""));
+        email.setReceivers(selectedEmail.getSender() + "," + selectedEmail.getReceivers().toString().replace(user, "").replace("[", "").replace("]", ""));
         email.setText("\n\n-----------------------------------------------------------------------------------------------------\n" + "from: " + selectedEmail.getSender() +"\n" + "to: " + selectedEmail.getReceivers() + "\n\n" + selectedEmail.getTextTab());
         buildScene(email);
     }

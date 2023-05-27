@@ -130,9 +130,9 @@ public class ServerOperations implements Runnable{
                     }
                 }
                 if(email.getSubject() == null || Objects.equals(email.getSubject(), "") || email.getSubject().trim().isEmpty()){
-                    newEmail.put("subjects", "SEND ERROR: < empty subject >");
+                    errorMail.put("subjects", "SEND ERROR: < empty subject >");
                 }else{
-                    newEmail.put("subjects", "SEND ERROR:" + email.getSubject());
+                    errorMail.put("subjects", "SEND ERROR: " + email.getSubject());
                 }
                 errorMail.put("from", email.getSender());
                 errorMail.put("to", toList);

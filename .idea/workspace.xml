@@ -9,12 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="Sincronizzazione metodo per eliminare le mail + inserimento conto nuove mail">
+    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="Ripristino JSON + correzione errori">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ComposeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ComposeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/ClientModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/ClientModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Files/MailLists.json" beforeDir="false" afterPath="$PROJECT_DIR$/Files/MailLists.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerOperations.java" afterDir="false" />
     </list>
@@ -91,7 +88,7 @@
       <command value="mvn clean install" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="com.riccardo.client.Client" />
       <module name="Client" />
@@ -305,7 +302,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685003813072</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Ripristino JSON + correzione errori">
+      <created>1685193354584</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1685193354584</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -340,6 +344,7 @@
     <MESSAGE value="Aggiunta finestra notifica + aggiunta data e id + aggiunta indentatura per risposta" />
     <MESSAGE value="Correzioni generche" />
     <MESSAGE value="Sincronizzazione metodo per eliminare le mail + inserimento conto nuove mail" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sincronizzazione metodo per eliminare le mail + inserimento conto nuove mail" />
+    <MESSAGE value="Ripristino JSON + correzione errori" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ripristino JSON + correzione errori" />
   </component>
 </project>
