@@ -67,7 +67,13 @@ public class ServerOperations implements Runnable{
             ArrayList<String> toListNotFound = new ArrayList<>();
 
             JSONObject newEmail = new JSONObject();
-            newEmail.put("subjects", email.getSubject());
+
+            if(email.getSubject() == null || Objects.equals(email.getSubject(), "") || email.getSubject().trim().isEmpty()){
+                newEmail.put("subjects", "< empty subject >");
+            }else{
+                newEmail.put("subjects", email.getSubject());
+            }
+
             newEmail.put("from", email.getSender());
             JSONArray toList = new JSONArray();
             for (int tmp = 0; tmp < email.getReceivers().size(); tmp++){
@@ -112,28 +118,39 @@ public class ServerOperations implements Runnable{
                     }
                 }
             }
-
+            updateJSON(jsonObject);
             if(found < receivers.size()){
                 controller.updateLog(usermailbox + "--> ERROR: mail id doesn't exist");
+
+                JSONObject errorMail = new JSONObject();
 
                 for (int i = 0; i < receivers.size(); i++) {
                     if (!recFound.get(receivers.get(i))) {
                         toListNotFound.add(receivers.get(i));
                     }
                 }
-
-                newEmail.put("text", "SERVER MESSAGE ERROR: clients " + newEmail.get("receivers") + toListNotFound + " not found" + "\n\n" + newEmail.get("text"));
+                if(email.getSubject() == null || Objects.equals(email.getSubject(), "") || email.getSubject().trim().isEmpty()){
+                    newEmail.put("subjects", "SEND ERROR: < empty subject >");
+                }else{
+                    newEmail.put("subjects", "SEND ERROR:" + email.getSubject());
+                }
+                errorMail.put("from", email.getSender());
+                errorMail.put("to", toList);
+                errorMail.put("date", new Date().toString());
+                errorMail.put("text", "SERVER MESSAGE ERROR: clients " + toListNotFound + " not found" + "\n\n" + newEmail.get("text"));
+                newId +=1;
+                errorMail.put("id", newId);
 
                 for (int i = 0; i < users.size(); i++) {
                     JSONObject user = (JSONObject) users.get(i);
                     if (Objects.equals(usermailbox, user.get("id"))) {
                         JSONArray mails = (JSONArray) user.get("mails");
-                        mails.add(0, newEmail);
+                        mails.add(0, errorMail);
                         break;
                     }
                 }
+                updateJSON(jsonObject);
             }
-            updateJSON(jsonObject);
             controller.updateLog(usermailbox + "--> mail id : sended");
 
         }catch (IOException | ClassNotFoundException | ParseException e) {

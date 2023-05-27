@@ -133,6 +133,7 @@ public class ClientConnection implements Runnable{
             Socket socket = new Socket(host, port);
 
             try {
+                model.setAllertConnection("");
                 outputStream = new ObjectOutputStream(socket.getOutputStream());
                 outputStream.flush();
                 inputStream = new ObjectInputStream(socket.getInputStream());
@@ -162,6 +163,7 @@ public class ClientConnection implements Runnable{
                 socket.close();
             }
         } catch (IOException | RuntimeException | ClassNotFoundException e) {
+            model.setAllertConnection("connection failed: retry in 10 sec...");
             System.err.println("Connection error: " + e.getMessage());
         }
     }

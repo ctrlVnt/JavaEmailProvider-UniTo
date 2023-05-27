@@ -1,5 +1,6 @@
 package com.riccardo.client.model;
 
+import javafx.application.Platform;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,7 +18,7 @@ public class ClientModel {
     private final ListProperty<Email> inbox;
     private final ObservableList<Email> inboxContent;
     private final StringProperty emailAddress;
-
+    private final StringProperty allertConnection;
     /**
      * Costruttore della classe.
      *
@@ -33,6 +34,7 @@ public class ClientModel {
         this.inbox.set(inboxContent);
         //È inutile
         this.emailAddress = new SimpleStringProperty(emailAddress);
+        this.allertConnection =  new SimpleStringProperty();
     }
 
     /**
@@ -68,5 +70,19 @@ public class ClientModel {
         return inbox.get().size();
     }
 
+    /**
+     * @return allertConnection, la proprietà per l'allerta di connessione
+     */
+    public StringProperty allertConnectionProperty() {
+        return allertConnection;
+    }
+
+    /**
+     * Imposta il messaggio di allerta di connessione
+     * @param message il messaggio di allerta
+     */
+    public void setAllertConnection(String message) {
+        Platform.runLater(() -> allertConnection.set(message));
+    }
 }
 

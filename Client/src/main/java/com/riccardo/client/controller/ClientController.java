@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -24,6 +25,8 @@ import java.util.List;
 import java.util.Random;
 
 public class ClientController {
+    @FXML
+    public Label allertConnection;
 
     @FXML
     private Label lblFrom;
@@ -90,6 +93,7 @@ public class ClientController {
         lstEmails.setOnMouseClicked(this::showSelectedEmail);
         //Non troppo utile
         lblUsername.textProperty().bind(model.emailAddressProperty());
+        allertConnection.textProperty().bind(model.allertConnectionProperty());
 
         /*Mail vuota*/
         emptyEmail = new Email("", List.of(""), "", "");

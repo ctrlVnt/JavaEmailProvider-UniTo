@@ -31,8 +31,6 @@ public class ComposeController{
     private Button cancelBtn;
     @FXML
     private TextFlow dangerAlert;
-
-    private Stage stage;
     private String sender;
     EmailModel email;
 
@@ -47,7 +45,7 @@ public class ComposeController{
         this.email = email;
     }
     @FXML
-    public void initialize() throws InterruptedException {
+    public void initialize(){
 
         senderTextField.textProperty().bind(email.emailAddressProperty());
         receivers.textProperty().bindBidirectional(email.receiversProperty());
