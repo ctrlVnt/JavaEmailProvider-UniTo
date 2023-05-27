@@ -71,11 +71,7 @@ public class ServerOperations implements Runnable{
             newEmail.put("from", email.getSender());
             JSONArray toList = new JSONArray();
             for (int tmp = 0; tmp < email.getReceivers().size(); tmp++){
-                if(tmp < email.getReceivers().size() - 1){
-                    toList.add(email.getReceivers().get(tmp) + ",");
-                }else{
-                    toList.add(email.getReceivers().get(tmp));
-                }
+                toList.add(email.getReceivers().get(tmp));
                 recFound.put(email.getReceivers().get(tmp), false);
             }
             newEmail.put("to", toList);
@@ -115,8 +111,8 @@ public class ServerOperations implements Runnable{
                         mails.add(0, newEmail);
                     }
                 }
-
             }
+
             if(found < receivers.size()){
                 controller.updateLog(usermailbox + "--> ERROR: mail id doesn't exist");
 
@@ -126,8 +122,7 @@ public class ServerOperations implements Runnable{
                     }
                 }
 
-
-                newEmail.put("SERVER MESSAGE ERROR: clients " + newEmail.get("receivers") + toListNotFound + "not found", newEmail.get("text"));
+                newEmail.put("text", "SERVER MESSAGE ERROR: clients " + newEmail.get("receivers") + toListNotFound + " not found" + "\n\n" + newEmail.get("text"));
 
                 for (int i = 0; i < users.size(); i++) {
                     JSONObject user = (JSONObject) users.get(i);

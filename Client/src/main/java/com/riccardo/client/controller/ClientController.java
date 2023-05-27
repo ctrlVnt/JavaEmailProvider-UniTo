@@ -4,6 +4,7 @@ import com.riccardo.client.Client;
 import com.riccardo.client.model.ClientModel;
 import com.riccardo.client.model.Email;
 import com.riccardo.client.model.EmailModel;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
@@ -15,9 +16,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ClientController {
 
@@ -64,7 +68,17 @@ public class ClientController {
             throw new IllegalStateException("Model can only be initialized once");
         }
         //istanza nuovo client
-        user = "Katherine.johnson@unito.it";
+        ArrayList<String> account = new ArrayList<>();
+        account.add("Katherine.johnson@unito.it");
+        account.add("doodo345@mymail.com");
+        account.add("hford@gmail.com");
+        account.add("riccardoventurini@yahoo.it");
+        account.add("francois.marshal@usmb.fr");
+
+        Random random = new Random();
+        int randomIndex = random.nextInt(account.size());
+        user = account.get(randomIndex);
+        //user = "Katherine.johnson@unito.it";
         model = new ClientModel(user);
 
         selectedEmail = null;
@@ -144,7 +158,7 @@ public class ClientController {
     protected void onReplyAtAllButtonClick() {
         EmailModel email = new EmailModel(user);
         email.setSubject("RE: " + selectedEmail.getSubject());
-        email.setReceivers(selectedEmail.getSender() + "," + selectedEmail.getReceivers().toString().replace(user, "").replace("[", "").replace("]", ""));
+        email.setReceivers(selectedEmail.getSender() + selectedEmail.getReceivers().toString().replace(user, "").replace("[", "").replace("]", ""));
         email.setText("\n\n-----------------------------------------------------------------------------------------------------\n" + "from: " + selectedEmail.getSender() +"\n" + "to: " + selectedEmail.getReceivers() + "\n\n" + selectedEmail.getTextTab());
         buildScene(email);
     }
@@ -180,5 +194,13 @@ public class ClientController {
         }catch (IOException e1){
             e1.printStackTrace();
         }
+    }
+
+    public void handleClose() {
+        Platform.exit();
+        System.exit(0);
+    }
+    public void setCloseEventHandler(Stage stage) {
+        stage.setOnCloseRequest((WindowEvent event) -> handleClose());
     }
 }

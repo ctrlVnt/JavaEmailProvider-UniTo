@@ -15,6 +15,7 @@ public class ServerConnection implements Runnable{
     }
     @Override
     public void run() {
+        controller.updateLog("Server is waiting...");
         try {
             ServerSocket serverSocket = new ServerSocket(port);
             System.out.println("Server listening on port " + port);
@@ -25,13 +26,14 @@ public class ServerConnection implements Runnable{
             }
         } catch (IOException e) {
             controller.updateLog("Server connection error: " + e.getMessage());
-            System.err.println("Server connection error: " + e.getMessage());
+            e.printStackTrace();
         }finally {
             if (socket!=null)
                 try {
                     controller.updateLog("Socket closure successful");
                     socket.close();
                 } catch (IOException e) {
+                    controller.updateLog("Socket closure ERROR: " + e.getMessage());
                     e.printStackTrace();
                 }
         }

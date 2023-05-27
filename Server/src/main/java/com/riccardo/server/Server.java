@@ -21,6 +21,7 @@ public class Server extends Application {
 
             ServerController servercontroller = new ServerController();
             fxmlLoader.setController(servercontroller);
+            servercontroller.setCloseEventHandler(stage);
 
             stage.setTitle("Server");
             stage.setScene(scene);

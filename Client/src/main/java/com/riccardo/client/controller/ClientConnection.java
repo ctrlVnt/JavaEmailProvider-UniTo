@@ -175,7 +175,7 @@ public class ClientConnection implements Runnable{
             NotifController controller = fxmlLoader.getController();
             controller.setNmail(nmail);
 
-            stage.setTitle("New mail!!!");
+            stage.setTitle(mailbox + ": new mail!!!");
             stage.setScene(scene);
             stage.show();
         }catch (IOException e1){
