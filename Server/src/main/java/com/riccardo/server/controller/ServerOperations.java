@@ -16,11 +16,20 @@ public class ServerOperations implements Runnable{
     ObjectInputStream inStream = null;
     ObjectOutputStream outStream = null;
     ServerController controller;
+
+    /**
+     * Costruttore della classe.
+     * @param socket   la socket da utilizzare
+     * @param controller   controller della vista
+     */
     public ServerOperations(Socket socket, ServerController controller) {
         this.socket = socket;
         this.controller = controller;
     }
 
+    /**
+     * elimina il messaggio ricevuto dal client dallo storage
+     */
     private synchronized void deleteConnection(){
         try {
             String usermailbox = (String)inStream.readObject();
@@ -57,6 +66,9 @@ public class ServerOperations implements Runnable{
         }
     }
 
+    /**
+     * aggiunge il messaggio ricevuto dal client nello storage
+     */
     private synchronized void sendConnection() {
         try {
             String usermailbox = (String) inStream.readObject();
@@ -158,35 +170,9 @@ public class ServerOperations implements Runnable{
         }
     }
 
-    @Override
-    public void run() {
-        try {
-            inStream = new ObjectInputStream(socket.getInputStream());
-            outStream = new ObjectOutputStream(socket.getOutputStream());
-            outStream.flush();
-
-            String op = (String)inStream.readObject();
-
-            if(Objects.equals(op, "deleteConnection")){
-                deleteConnection();
-            }else if(Objects.equals(op, "sendConnection")){
-                sendConnection();
-            }else if(Objects.equals(op, "checkComunication")){
-                checkComunication();
-            }
-
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                closeStreams();
-                socket.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
+    /**
+     * verifica che non ci siano nuove mail
+     */
     private void checkComunication() {
         try {
             String user = (String)inStream.readObject();
@@ -205,6 +191,9 @@ public class ServerOperations implements Runnable{
         }
     }
 
+    /**
+     * Chiude le connessioni aperte per la comunicazione di informazioni tra client e server.
+     */
     private void closeStreams() {
         try {
             if(inStream != null) {
@@ -219,6 +208,10 @@ public class ServerOperations implements Runnable{
         }
     }
 
+    /**
+     * Sovrascrive il contenuto già presente nel JSON file (storage).
+     * @param jsonObject l'oggetto da sovrascrivere
+     */
     private void updateJSON( JSONObject jsonObject ) throws IOException {
         FileWriter fileWriter = new FileWriter("Files/MailLists.json");
         fileWriter.write(jsonObject.toJSONString());
@@ -226,6 +219,11 @@ public class ServerOperations implements Runnable{
         fileWriter.close();
     }
 
+    /**
+     * Legge il contenuto del JSON file (storage).
+     * @param name la mail di cui voglio ottenere le informazioni
+     * @param number numero di mail ricevute dal client da confrontare con le nuove mail arrivate
+     */
     private List<Email> readJson(String name, int number){
         List<Email> inboxContent = new ArrayList<>();
 
@@ -276,5 +274,34 @@ public class ServerOperations implements Runnable{
             e.printStackTrace();
         }
         return inboxContent;
+    }
+
+    @Override
+    public void run() {
+        try {
+            inStream = new ObjectInputStream(socket.getInputStream());
+            outStream = new ObjectOutputStream(socket.getOutputStream());
+            outStream.flush();
+
+            String op = (String)inStream.readObject();
+
+            if(Objects.equals(op, "deleteConnection")){
+                deleteConnection();
+            }else if(Objects.equals(op, "sendConnection")){
+                sendConnection();
+            }else if(Objects.equals(op, "checkComunication")){
+                checkComunication();
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                closeStreams();
+                socket.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

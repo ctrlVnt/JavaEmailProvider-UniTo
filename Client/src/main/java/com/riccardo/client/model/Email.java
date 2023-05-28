@@ -58,51 +58,77 @@ public class Email implements Serializable {
         this.id = id;
     }
 
+    /**
+     * @return      il mittente della mail.
+     */
     public String getSender() {
         return sender;
     }
 
+    /**
+     * @return      la lista dei destinatari della mail.
+     */
     public List<String> getReceivers() {
         return receivers;
     }
 
+    /**
+     * @return      l'oggetto della mail.
+     */
     public String getSubject() {
         return subject;
     }
 
+    /**
+     * @return      il testo della mail.
+     */
     public String getText() {
         return text;
     }
 
+    /**
+     * @return      il testo della mail formattato con un tab.
+     */
     public String getTextTab() {
         String[] lines = text.split("\n");
         StringBuilder tabbedText = new StringBuilder();
         for (String line : lines) {
-            tabbedText.append("\t").append(line).append("\n");
+            tabbedText.append("|").append("\t").append(line).append("\n");
         }
         return tabbedText.toString();
     }
 
 
+    /**
+     * @return     l'id della mail.
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * @return      la data di invio della mail.
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     * imposta l'id della mail
+     * @param id      l'id della mail.
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     * imposta la data di invio della mail
+     * @param date      la data di invio della mail.
+     */
     public void setDate(String date) {
         this.date = date;
     }
 
-    /**
-     * @return      stringa composta dagli indirizzi e-mail del mittente più destinatari
-     */
     @Override
     public String toString() {
         return String.join(" - ", List.of(this.sender,this.subject));

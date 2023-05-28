@@ -34,19 +34,30 @@ public class ComposeController{
     private String sender;
     EmailModel email;
 
+    /**
+     * Costruttore della classe.
+     * @param user   indirizzo email principale
+     */
     public ComposeController(String user) {
         this.sender = user;
     }
 
+    /**
+     * Costruttore della classe.
+     */
     public ComposeController() {
     }
 
+    /**
+     * Imposta il modello.
+     * @param email   email selezionata
+     */
     public void setModel(EmailModel email){
         this.email = email;
     }
+
     @FXML
     public void initialize(){
-
         senderTextField.textProperty().bind(email.emailAddressProperty());
         receivers.textProperty().bindBidirectional(email.receiversProperty());
         objectTextField.textProperty().bindBidirectional(email.subjectProperty());
@@ -56,11 +67,17 @@ public class ComposeController{
         cancelBtn.setOnMouseClicked(this::onCancelButtonClick);
     }
 
+    /**
+     * Annulla la scrittura di un messaggio.
+     */
     private void onCancelButtonClick(MouseEvent mouseEvent) {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Invia il messaggio.
+     */
     public void onSendButtonClick(MouseEvent mouseEvent) {
         String recipientsText = receivers.getText();
         String[] recipientEmails = recipientsText.split(",");
@@ -94,6 +111,4 @@ public class ComposeController{
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
-
-
 }

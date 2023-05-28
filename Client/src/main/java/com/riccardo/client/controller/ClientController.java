@@ -15,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -110,7 +109,7 @@ public class ClientController {
     }
 
     /**
-     * Mostra la mail selezionata nella vista
+     * Mostra la mail selezionata nella vista.
      */
     protected void showSelectedEmail(MouseEvent mouseEvent) {
         Email email = lstEmails.getSelectionModel().getSelectedItem();
@@ -120,7 +119,7 @@ public class ClientController {
     }
 
     /**
-     * Aggiorna la vista con la mail selezionata
+     * Aggiorna la vista con la mail selezionata.
      */
     protected void updateDetailView(Email email) {
         if(email != null) {
@@ -132,7 +131,7 @@ public class ClientController {
     }
 
     /**
-     * Elimina la mail selezionata
+     * Elimina la mail selezionata.
      */
     @FXML
     protected void onDeleteButtonClick(){
@@ -144,7 +143,7 @@ public class ClientController {
     }
 
     /**
-     * Risponde solo al mittente
+     * Risponde solo al mittente.
      */
     @FXML
     protected void onReplyButtonClick() {
@@ -156,7 +155,7 @@ public class ClientController {
     }
 
     /**
-     * Risponde al mittente e agli altri riceventi
+     * Risponde al mittente e agli altri destinatari.
      */
     @FXML
     protected void onReplyAtAllButtonClick() {
@@ -168,7 +167,7 @@ public class ClientController {
     }
 
     /**
-     * Inoltra la mail
+     * Inoltra la mail.
      */
     @FXML
     protected void onForwardButtonClick() {
@@ -177,12 +176,20 @@ public class ClientController {
         email.setText("\n\n----------------Message forwarded------------------\n" + "from: " + selectedEmail.getSender() +"\n" + "to: " + selectedEmail.getReceivers() + "\n\n" + selectedEmail.getText());
         buildScene(email);
     }
+
+    /**
+     *  Scrive una nuova mail.
+     */
     @FXML
     protected void writeButtonClick() {
         EmailModel email = new EmailModel(user);
         buildScene(email);
     }
 
+    /**
+     * Costruisce la scena per aprire la schermata per digitare il messaggio.
+     * @param email la mail selezionata nella lista della inbox.
+     */
     private void buildScene(EmailModel email){
         try {
             Stage stage = new Stage();
@@ -200,10 +207,18 @@ public class ClientController {
         }
     }
 
+    /**
+     * Handler per terminare i thread e il programma stesso.
+     */
     public void handleClose() {
         Platform.exit();
         System.exit(0);
     }
+
+    /**
+     * Termina i thread in esecuzione e il programma al chiudersi della finestra.
+     * @param stage lo stage da chiudere
+     */
     public void setCloseEventHandler(Stage stage) {
         stage.setOnCloseRequest((WindowEvent event) -> handleClose());
     }

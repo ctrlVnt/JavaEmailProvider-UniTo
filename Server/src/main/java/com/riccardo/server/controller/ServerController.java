@@ -6,10 +6,6 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-/**
- *
- * @author Riccardo Venturini
- */
 public class ServerController {
 
     @FXML
@@ -23,14 +19,26 @@ public class ServerController {
         serverConnection.start();
     }
 
-    // Metodo per aggiornare il testo del log
+    /**
+     * Inserisce una nuova linea di log.
+     * @param text  testo da aggiungere
+     */
     public void updateLog(String text) {
         log_text.appendText(text + "\n");
     }
+
+    /**
+     * Handler per terminare i thread e il programma stesso.
+     */
     public void handleClose() {
         Platform.exit();
         System.exit(0);
     }
+
+    /**
+     * Termina i thread in esecuzione e il programma al chiudersi della finestra.
+     * @param stage lo stage da chiudere
+     */
     public void setCloseEventHandler(Stage stage) {
         stage.setOnCloseRequest((WindowEvent event) -> handleClose());
     }

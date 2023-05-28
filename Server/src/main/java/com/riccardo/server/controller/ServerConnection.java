@@ -9,6 +9,11 @@ public class ServerConnection implements Runnable{
     private final int port;
     private final ServerController controller;
 
+    /**
+     * Costruttore della classe.
+     * @param port   porta dove resta in attesa il server
+     * @param controller   controller della vista
+     */
     public ServerConnection(int port, ServerController controller) {
         this.port = port;
         this.controller = controller;

@@ -27,7 +27,12 @@ public class ClientConnection implements Runnable{
     private final String operation;
     private Email mail;
 
-    /*costruttore generale*/
+    /**
+     * Costruttore della classe.
+     * @param model   model della mail che sto utilizzando
+     * @param user   indirizzo email principale
+     * @param operation   operazione che voglio eseguire
+     */
     public ClientConnection(ClientModel model, String user, String operation){
         this.model = model;
         this.mailbox = user;
@@ -36,7 +41,13 @@ public class ClientConnection implements Runnable{
         this.operation = operation;
     }
 
-    /*costruttore per eliminare la mail*/
+    /**
+     * Costruttore della classe.
+     * @param model   model della mail che sto utilizzando
+     * @param mail   indirizzo email principale
+     * @param operation   operazione che voglio eseguire
+     * @param deleted   mail da eliminare
+     */
     public ClientConnection(ClientModel model, String mail, String operation, Email deleted){
         this.model = model;
         this.mailbox = mail;
@@ -46,6 +57,13 @@ public class ClientConnection implements Runnable{
         this.mail = deleted;
     }
 
+    /**
+     * Costruttore della classe.
+     * @param mail   indirizzo email principale
+     * @param operation   operazione che voglio eseguire
+     * @param tosend   mail da spedire
+     * @param receivers lista destinatari
+     */
     public ClientConnection(String mail, String operation, Email tosend, ArrayList<String> receivers){
         this.mailbox = mail;
         serverAddress = "localhost";
@@ -55,7 +73,12 @@ public class ClientConnection implements Runnable{
         this.receivers = receivers;
     }
 
-    /*invia al server la mail che deve eliminare dal file json*/
+    /**
+     * Invia una richiesta al server per eliminare una mail, e la elimina in locale.
+     * @param host   il nome dell'host
+     * @param port   porta alla quale connettersi
+     * @return TRUE se l'operazione va a buon fine, FALSE altrimenti
+     */
     private boolean deleteComunication(String host, int port){
         try {
             Socket socket = new Socket(host, port);
@@ -83,6 +106,12 @@ public class ClientConnection implements Runnable{
         }
     }
 
+    /**
+     * Invia una richiesta al server per inviare una mail.
+     * @param host   il nome dell'host
+     * @param port   porta alla quale connettersi
+     * @return TRUE se l'operazione va a buon fine, FALSE altrimenti
+     */
     private boolean sendComunication(String host, int port) {
         try {
             Socket socket = new Socket(host, port);
@@ -113,7 +142,9 @@ public class ClientConnection implements Runnable{
         }
     }
 
-    /*chiude le connessini*/
+    /**
+     * Chiude le connessioni aperte per la comunicazione di informazioni.
+     */
     private void closeConnections() {
         try {
             if(inputStream != null) {
@@ -128,6 +159,11 @@ public class ClientConnection implements Runnable{
         }
     }
 
+    /**
+     * Invia una richiesta al server per verificare se sono arrivate nuove mail.
+     * @param host   il nome dell'host
+     * @param port   porta alla quale connettersi
+     */
     private void checkComunication(String host, int port) {
         try {
             Socket socket = new Socket(host, port);
@@ -168,6 +204,10 @@ public class ClientConnection implements Runnable{
         }
     }
 
+    /**
+     * Costruisce una finestra di notifiche per le nuove mail arrivate.
+     * @param nmail numero di mail arrivate
+     */
     private void buildNotif(int nmail){
         try {
             Stage stage = new Stage();

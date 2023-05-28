@@ -21,9 +21,7 @@ public class ClientModel {
     private final StringProperty allertConnection;
     /**
      * Costruttore della classe.
-     *
      * @param emailAddress   indirizzo email
-     *
      */
 
     public ClientModel(String emailAddress) {
@@ -38,31 +36,31 @@ public class ClientModel {
     }
 
     /**
-     * @return lista di email
-     *
+     * @return lista di email.
      */
     public ListProperty<Email> inboxProperty() {
         return inbox;
     }
 
     /**
-     *
-     * @return   indirizzo email della casella postale
-     *
+     * @return   indirizzo email della casella postale.
      */
     public StringProperty emailAddressProperty() {
         return emailAddress;
     }
 
     /**
-     *
-     * @return   elimina l'email specificata
-     *
+     * elimina l'email specificata.
+     * @param email   indirizzo email da rimuovere alla lista di mail.
      */
     public void deleteEmail(Email email) {
         inboxContent.remove(email);
     }
-    
+
+    /**
+     * aggiunge l'email specificata nella lista mail.
+     * @param email   indirizzo email da aggiungere alla lista di mail.
+     */
     public void addInboxContent(Email email){
         inboxContent.add(0, email);
     }
