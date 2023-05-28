@@ -5,7 +5,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.*;
@@ -122,11 +121,13 @@ public class ServerOperations implements Runnable{
 
                 for (int i = 0; i < users.size(); i++) {
                     JSONObject user = (JSONObject) users.get(i);
-                    if (Objects.equals(receivers.get(k), user.get("id"))) {
+                    if (receivers.get(k).equalsIgnoreCase((String) user.get("id"))) {
                         found+=1;
                         recFound.replace(receivers.get(k), true);
                         JSONArray mails = (JSONArray) user.get("mails");
                         mails.add(0, newEmail);
+                    }else if(Objects.equals(receivers.get(k), "SERVER@no-reply.unito")){
+                        found+=1;
                     }
                 }
             }
@@ -146,8 +147,8 @@ public class ServerOperations implements Runnable{
                 }else{
                     errorMail.put("subjects", "SEND ERROR: " + email.getSubject());
                 }
-                errorMail.put("from", email.getSender());
-                errorMail.put("to", toList);
+                errorMail.put("from", "SERVER@no-reply.unito");
+                errorMail.put("to", email.getSender());
                 errorMail.put("date", new Date().toString());
                 errorMail.put("text", "SERVER MESSAGE ERROR: clients " + toListNotFound + " not found" + "\n\n" + newEmail.get("text"));
                 newId +=1;

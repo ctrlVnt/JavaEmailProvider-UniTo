@@ -17,11 +17,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class ClientController {
     @FXML
@@ -71,7 +68,7 @@ public class ClientController {
         }
         //istanza nuovo client
         ArrayList<String> account = new ArrayList<>();
-        account.add("Katherine.johnson@unito.it");
+        account.add("katherine.johnson@unito.it");
         account.add("doodo345@mymail.com");
         account.add("hford@gmail.com");
         account.add("riccardoventurini@yahoo.it");
@@ -161,7 +158,26 @@ public class ClientController {
     protected void onReplyAtAllButtonClick() {
         EmailModel email = new EmailModel(user);
         email.setSubject("RE: " + selectedEmail.getSubject());
-        email.setReceivers(selectedEmail.getSender() + "," + selectedEmail.getReceivers().toString().replace(user, "").replace("[", "").replace("]", ""));
+
+        Set<String> recipients = new LinkedHashSet<>();
+        recipients.add(selectedEmail.getSender());
+        recipients.addAll(selectedEmail.getReceivers());
+
+        StringBuilder receiversText = new StringBuilder();
+        Iterator<String> iterator = recipients.iterator();
+        while (iterator.hasNext()) {
+            String recipient = iterator.next();
+            if (!recipient.equals(user)) {
+                receiversText.append(recipient);
+                if (iterator.hasNext()) {
+                    receiversText.append(", ");
+                }
+            }
+        }
+        if (receiversText.length() > 0 && receiversText.charAt(receiversText.length() - 1) == ',') {
+            receiversText.deleteCharAt(receiversText.length() - 1);
+        }
+        email.setReceivers(receiversText.toString());
         email.setText("\n\n-----------------------------------------------------------------------------------------------------\n" + "from: " + selectedEmail.getSender() +"\n" + "to: " + selectedEmail.getReceivers() + "\n\n" + selectedEmail.getTextTab());
         buildScene(email);
     }
@@ -173,7 +189,7 @@ public class ClientController {
     protected void onForwardButtonClick() {
         EmailModel email = new EmailModel(user);
         email.setSubject("FW: " + selectedEmail.getSubject());
-        email.setText("\n\n----------------Message forwarded------------------\n" + "from: " + selectedEmail.getSender() +"\n" + "to: " + selectedEmail.getReceivers() + "\n\n" + selectedEmail.getText());
+        email.setText("\n\n----------------Message forwarded------------------\n" + "from: " + selectedEmail.getSender() +"\n" + "to: " + selectedEmail.getReceivers() + "\n\n" + selectedEmail.getText() + "\n\n" + "---------------------------------------------------");
         buildScene(email);
     }
 

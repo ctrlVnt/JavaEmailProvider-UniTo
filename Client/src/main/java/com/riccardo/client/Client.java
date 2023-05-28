@@ -1,28 +1,11 @@
 package com.riccardo.client;
 
 import com.riccardo.client.controller.ClientController;
-import com.riccardo.client.model.ClientModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
-import java.io.FileReader;
-import java.text.ParseException;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
-
-/**
- *
- * @author Riccardo Venturini
- */
 
 public class Client extends Application {
     @Override

@@ -11,9 +11,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ComposeController{
 
@@ -82,6 +83,7 @@ public class ComposeController{
         String recipientsText = receivers.getText();
         String[] recipientEmails = recipientsText.split(",");
 
+        Set<String> uniqueReceivers = new HashSet<>();
         List<String> receiversMail = new ArrayList<>();
 
         for (String recipient : recipientEmails) {
@@ -89,14 +91,17 @@ public class ComposeController{
             if (!email.contains("@")) {
                 dangerAlert.setVisible(true);
                 Text errorMessage = (Text) dangerAlert.getChildren().get(0);
-                errorMessage.setText("Indirizzo mail non valido");
+                errorMessage.setText("Indirizzo mail non valido o vuoto");
                 return;
             }
+            if (uniqueReceivers.contains(email)) {
+                dangerAlert.setVisible(true);
+                Text errorMessage = (Text) dangerAlert.getChildren().get(0);
+                errorMessage.setText("Duplicato indirizzo mail: " + email);
+                return;
+            }
+            uniqueReceivers.add(email);
             receiversMail.add(email);
-        }
-
-        if (objectTextField.getText() == null) {
-            objectTextField.setText("[object empty]");
         }
 
         Email email = new Email(
@@ -111,4 +116,5 @@ public class ComposeController{
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
+
 }
