@@ -61,22 +61,20 @@ public class ClientController {
     private String user;
 
     private BooleanProperty replyButtonDisabled = new SimpleBooleanProperty(true);
-    @FXML
+
+    /**
+     * Costruttore della classe.
+     * @param user   indirizzo email principale
+     */
+    public ClientController(String user) {
+        this.user = user;
+    }
+
     public void initialize() throws InterruptedException {
         if (this.model != null) {
             throw new IllegalStateException("Model can only be initialized once");
         }
-        //istanza nuovo client
-        ArrayList<String> account = new ArrayList<>();
-        account.add("katherine.johnson@unito.it");
-        account.add("doodo345@mymail.com");
-        account.add("hford@gmail.com");
-        account.add("riccardoventurini@yahoo.it");
-        account.add("francois.marshal@usmb.fr");
 
-        Random random = new Random();
-        int randomIndex = random.nextInt(account.size());
-        user = account.get(randomIndex);
         //user = "Katherine.johnson@unito.it";
         model = new ClientModel(user);
 
@@ -100,6 +98,9 @@ public class ClientController {
         btnReplyatall.disableProperty().bind(replyButtonDisabled);
         btnForward.disableProperty().bind(replyButtonDisabled);
         btnDelete.disableProperty().bind(replyButtonDisabled);
+
+        Thread firstConnection = new Thread(new ClientConnection(model, user, "firstConnection"));
+        firstConnection.start();
 
         Thread checkNewMails = new Thread(new ClientConnection(model, user, "checkNewMails"));
         checkNewMails.start();
@@ -215,7 +216,7 @@ public class ClientController {
             composecontroller.setModel(email);
             Scene scene = new Scene(fxmlLoader.load(), 615, 617);
 
-            stage.setTitle("Write your mail");
+            stage.setTitle(user + ": Write your mail");
             stage.setScene(scene);
             stage.show();
         }catch (IOException e1){
@@ -227,6 +228,8 @@ public class ClientController {
      * Handler per terminare i thread e il programma stesso.
      */
     public void handleClose() {
+        Thread lastConnection = new Thread(new ClientConnection(model, user, "lastConnection"));
+        lastConnection.start();
         Platform.exit();
         System.exit(0);
     }

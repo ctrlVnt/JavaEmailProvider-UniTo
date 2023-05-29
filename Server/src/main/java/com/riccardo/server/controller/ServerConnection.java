@@ -5,7 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServerConnection implements Runnable{
-    Socket socket = null;
+
+    ServerSocket serverSocket = null;
     private final int port;
     private final ServerController controller;
 
@@ -22,7 +23,7 @@ public class ServerConnection implements Runnable{
     public void run() {
         controller.updateLog("Server is waiting...");
         try {
-            ServerSocket serverSocket = new ServerSocket(port);
+            serverSocket = new ServerSocket(port);
             System.out.println("Server listening on port " + port);
             while (true) {
                 Socket clientSocket = serverSocket.accept();
@@ -32,11 +33,11 @@ public class ServerConnection implements Runnable{
         } catch (IOException e) {
             controller.updateLog("Server connection error: " + e.getMessage());
             e.printStackTrace();
-        }finally {
-            if (socket!=null)
+        } finally {
+            if (serverSocket != null)
                 try {
+                    serverSocket.close();
                     controller.updateLog("Socket closure successful");
-                    socket.close();
                 } catch (IOException e) {
                     controller.updateLog("Socket closure ERROR: " + e.getMessage());
                     e.printStackTrace();

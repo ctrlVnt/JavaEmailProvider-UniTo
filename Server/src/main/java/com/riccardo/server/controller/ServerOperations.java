@@ -34,7 +34,6 @@ public class ServerOperations implements Runnable{
             String usermailbox = (String)inStream.readObject();
             Email deletemail = (Email)inStream.readObject();
 
-            /*operazione sul JSON*/
             JSONParser parser = new JSONParser();
             FileReader reader = new FileReader("Files/MailLists.json");
             Object obj = parser.parse(reader);
@@ -95,7 +94,6 @@ public class ServerOperations implements Runnable{
             newEmail.put("text", email.getText());
             newEmail.put("date", new Date().toString());
 
-            /*operazione sul JSON*/
             JSONParser parser = new JSONParser();
             FileReader reader = new FileReader("Files/MailLists.json");
             Object obj = parser.parse(reader);
@@ -186,6 +184,32 @@ public class ServerOperations implements Runnable{
             outStream.flush();
 
             controller.updateLog(user + "--> mail checked");
+
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * segnala la prima connessione di un client
+     */
+    private void firstConnection() {
+        try {
+            String user = (String)inStream.readObject();
+            controller.updateLog("First connection from... " + user);
+
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * segnala la chiusura di un client
+     */
+    private void lastConnection() {
+        try {
+            String user = (String)inStream.readObject();
+            controller.updateLog(user + " closed connection");
 
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -292,6 +316,10 @@ public class ServerOperations implements Runnable{
                 sendConnection();
             }else if(Objects.equals(op, "checkComunication")){
                 checkComunication();
+            }else if(Objects.equals(op, "firstConnection")) {
+                firstConnection();
+            }else if(Objects.equals(op, "lastConnection")) {
+                lastConnection();
             }
 
         } catch (IOException | ClassNotFoundException e) {

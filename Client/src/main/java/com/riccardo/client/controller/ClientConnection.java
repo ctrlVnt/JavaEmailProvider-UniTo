@@ -216,7 +216,7 @@ public class ClientConnection implements Runnable{
             NotifController controller = fxmlLoader.getController();
             controller.setNmail(nmail);
 
-            stage.setTitle(mailbox + ": new mail!!!");
+            stage.setTitle(mailbox + ": new mail");
             stage.setScene(scene);
             stage.show();
         }catch (IOException e1){
@@ -224,12 +224,71 @@ public class ClientConnection implements Runnable{
         }
     }
 
+    /**
+     * Segnala la prima connessione effettuata.
+     * @param host   il nome dell'host
+     * @param port   porta alla quale connettersi
+     * @return TRUE se l'operazione va a buon fine, FALSE altrimenti
+     */
+    private boolean fistConnection(String host, int port) {
+        try {
+            Socket socket = new Socket(host, port);
+
+            try {
+                outputStream = new ObjectOutputStream(socket.getOutputStream());
+                outputStream.flush();
+                outputStream.writeObject("firstConnection");
+                outputStream.flush();
+
+                outputStream.writeObject(mailbox);
+                outputStream.flush();
+
+                return true;
+            } finally {
+                closeConnections();
+                socket.close();
+            }
+        } catch (IOException e) {
+            System.err.println("Connection error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Segnala che il client si è disconnesso
+     * @param host   il nome dell'host
+     * @param port   porta alla quale connettersi
+     * @return TRUE se l'operazione va a buon fine, FALSE altrimenti
+     */
+    private boolean lastConnection(String host, int port) {
+        try {
+            Socket socket = new Socket(host, port);
+
+            try {
+                outputStream = new ObjectOutputStream(socket.getOutputStream());
+                outputStream.flush();
+                outputStream.writeObject("lastConnection");
+                outputStream.flush();
+
+                outputStream.writeObject(mailbox);
+                outputStream.flush();
+
+                return true;
+            } finally {
+                closeConnections();
+                socket.close();
+            }
+        } catch (IOException e) {
+            System.err.println("Connection error: " + e.getMessage());
+            return false;
+        }
+    }
+
     @Override
     public void run() {
-
+        boolean success = false;
         if(Objects.equals(operation, "deleteMail"))
         {
-            boolean success = false;
             while (!success) {
                 success = deleteComunication(serverAddress, port);
                 if (success) {
@@ -243,7 +302,6 @@ public class ClientConnection implements Runnable{
             }
         }else if(Objects.equals(operation, "sendMail"))
         {
-            boolean success = false;
             while (!success) {
                 success = sendComunication(serverAddress, port);
                 if (success) {
@@ -263,6 +321,32 @@ public class ClientConnection implements Runnable{
 
                 try {
                     Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else if(Objects.equals(operation, "firstConnection"))
+        {
+            while (!success) {
+                success = fistConnection(serverAddress, port);
+                if (success) {
+                    continue;
+                }
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else if(Objects.equals(operation, "lastConnection"))
+        {
+            while (!success) {
+                success = lastConnection(serverAddress, port);
+                if (success) {
+                    continue;
+                }
+                try {
+                    Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

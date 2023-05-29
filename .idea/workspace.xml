@@ -9,14 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="Aggiunti commenti e migliorata formattazione codice.">
+    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="Migliorie">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ComposeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ComposeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/MailLists.json" beforeDir="false" afterPath="$PROJECT_DIR$/Files/MailLists.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerOperations.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -179,7 +177,8 @@
       <workItem from="1684767688418" duration="1510000" />
       <workItem from="1684996722904" duration="6935000" />
       <workItem from="1685180639872" duration="4395000" />
-      <workItem from="1685280196655" duration="6461000" />
+      <workItem from="1685280196655" duration="6494000" />
+      <workItem from="1685362155188" duration="7756000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1681642056980</created>
@@ -328,7 +327,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685282611443</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Migliorie">
+      <created>1685286667792</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1685286667792</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,6 +372,7 @@
     <MESSAGE value="Ripristino JSON + correzione errori" />
     <MESSAGE value="Piccole correzioni" />
     <MESSAGE value="Aggiunti commenti e migliorata formattazione codice." />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunti commenti e migliorata formattazione codice." />
+    <MESSAGE value="Migliorie" />
+    <option name="LAST_COMMIT_MESSAGE" value="Migliorie" />
   </component>
 </project>
