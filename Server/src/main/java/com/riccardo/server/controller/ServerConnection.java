@@ -3,6 +3,8 @@ package com.riccardo.server.controller;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class ServerConnection implements Runnable{
 
@@ -23,12 +25,12 @@ public class ServerConnection implements Runnable{
     public void run() {
         controller.updateLog("Server is waiting...");
         try {
+            Executor executor = Executors.newFixedThreadPool(8);
             serverSocket = new ServerSocket(port);
             System.out.println("Server listening on port " + port);
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                Thread serverOperations = new Thread(new ServerOperations(clientSocket, controller));
-                serverOperations.start();
+                executor.execute(new Thread(new ServerOperations(clientSocket, controller)));
             }
         } catch (IOException e) {
             controller.updateLog("Server connection error: " + e.getMessage());

@@ -198,7 +198,7 @@ public class ClientConnection implements Runnable{
                 socket.close();
             }
         } catch (IOException | RuntimeException | ClassNotFoundException e) {
-            model.setAllertConnection("connection failed: retry in 10 sec...");
+            model.setAllertConnection("connection failed: waiting for connection...");
             System.err.println("Connection error: " + e.getMessage());
         }
     }
