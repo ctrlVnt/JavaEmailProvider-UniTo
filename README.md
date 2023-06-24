@@ -32,4 +32,4 @@ JavaFx
 Json-simple
 > https://code.google.com/archive/p/json-simple/downloads
 
-It need to go to *file* > *project structure* > *libraries* and add jar file for json-simple and all jar file in *gluon* > *lib* folder.
+It need to go to *file* > *project structure* > *libraries* and add jar file for json-simple and all jar files in *gluon* > *lib* folder.
