@@ -9,12 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="Spostamento assegnazione mail + correzione bugs + inserimento prima e ultima connessione">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="Insert threadpool, edit text when connection is lost">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/MailLists.json" beforeDir="false" afterPath="$PROJECT_DIR$/Files/MailLists.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/riccardo/server/controller/ServerConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,7 +182,8 @@
       <workItem from="1687248118387" duration="158000" />
       <workItem from="1687426383071" duration="1942000" />
       <workItem from="1687505861358" duration="84000" />
-      <workItem from="1687607706491" duration="1327000" />
+      <workItem from="1687607706491" duration="4508000" />
+      <workItem from="1687616667282" duration="109000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1681642056980</created>
@@ -349,7 +346,15 @@
       <option name="project" value="LOCAL" />
       <updated>1685369967568</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Insert threadpool, edit text when connection is lost">
+      <option name="closed" value="true" />
+      <created>1687610559473</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1687610559474</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -389,6 +394,7 @@
     <MESSAGE value="Aggiunti commenti e migliorata formattazione codice." />
     <MESSAGE value="Migliorie" />
     <MESSAGE value="Spostamento assegnazione mail + correzione bugs + inserimento prima e ultima connessione" />
-    <option name="LAST_COMMIT_MESSAGE" value="Spostamento assegnazione mail + correzione bugs + inserimento prima e ultima connessione" />
+    <MESSAGE value="Insert threadpool, edit text when connection is lost" />
+    <option name="LAST_COMMIT_MESSAGE" value="Insert threadpool, edit text when connection is lost" />
   </component>
 </project>
