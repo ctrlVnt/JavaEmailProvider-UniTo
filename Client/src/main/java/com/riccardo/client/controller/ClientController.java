@@ -75,21 +75,15 @@ public class ClientController {
             throw new IllegalStateException("Model can only be initialized once");
         }
 
-        //user = "Katherine.johnson@unito.it";
         model = new ClientModel(user);
 
         selectedEmail = null;
 
-        //binding tra lstEmails e inboxProperty
         lstEmails.itemsProperty().bind(model.inboxProperty());
-        //fa showSelectedEmail quando clicco sopra, ma non è strettamente necessario, potrei settarlo
-        // nel SceneBuilder l'apertura di quel metodo e sarebbe equivalente, come onDeleteButtonClick
         lstEmails.setOnMouseClicked(this::showSelectedEmail);
-        //Non troppo utile
         lblUsername.textProperty().bind(model.emailAddressProperty());
         allertConnection.textProperty().bind(model.allertConnectionProperty());
 
-        /*Mail vuota*/
         emptyEmail = new Email("", List.of(""), "", "");
 
         updateDetailView(emptyEmail);
@@ -159,28 +153,32 @@ public class ClientController {
     protected void onReplyAtAllButtonClick() {
         EmailModel email = new EmailModel(user);
         email.setSubject("RE: " + selectedEmail.getSubject());
+        System.out.println(selectedEmail.getReceivers().size());
+        if(selectedEmail.getReceivers().size() == 1){
+            onReplyButtonClick();
+        }else{
+            Set<String> recipients = new LinkedHashSet<>();
+            recipients.add(selectedEmail.getSender());
+            recipients.addAll(selectedEmail.getReceivers());
 
-        Set<String> recipients = new LinkedHashSet<>();
-        recipients.add(selectedEmail.getSender());
-        recipients.addAll(selectedEmail.getReceivers());
-
-        StringBuilder receiversText = new StringBuilder();
-        Iterator<String> iterator = recipients.iterator();
-        while (iterator.hasNext()) {
-            String recipient = iterator.next();
-            if (!recipient.equals(user)) {
-                receiversText.append(recipient);
-                if (iterator.hasNext()) {
-                    receiversText.append(", ");
+            StringBuilder receiversText = new StringBuilder();
+            Iterator<String> iterator = recipients.iterator();
+            while (iterator.hasNext()) {
+                String recipient = iterator.next();
+                if (!recipient.equals(user)) {
+                    receiversText.append(recipient);
+                    if (iterator.hasNext()) {
+                        receiversText.append(", ");
+                    }
                 }
             }
+            if (receiversText.length() > 0 && receiversText.charAt(receiversText.length() - 1) == ',') {
+                receiversText.deleteCharAt(receiversText.length() - 1);
+            }
+            email.setReceivers(receiversText.toString());
+            email.setText("\n\n-----------------------------------------------------------------------------------------------------\n" + "from: " + selectedEmail.getSender() +"\n" + "to: " + selectedEmail.getReceivers() + "\n\n" + selectedEmail.getTextTab());
+            buildScene(email);
         }
-        if (receiversText.length() > 0 && receiversText.charAt(receiversText.length() - 1) == ',') {
-            receiversText.deleteCharAt(receiversText.length() - 1);
-        }
-        email.setReceivers(receiversText.toString());
-        email.setText("\n\n-----------------------------------------------------------------------------------------------------\n" + "from: " + selectedEmail.getSender() +"\n" + "to: " + selectedEmail.getReceivers() + "\n\n" + selectedEmail.getTextTab());
-        buildScene(email);
     }
 
     /**

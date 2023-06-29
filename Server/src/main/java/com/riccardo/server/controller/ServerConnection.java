@@ -3,14 +3,16 @@ package com.riccardo.server.controller;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class ServerConnection implements Runnable{
 
     ServerSocket serverSocket = null;
     private final int port;
     private final ServerController controller;
+    private ExecutorService executorService;
 
     /**
      * Costruttore della classe.
@@ -25,12 +27,12 @@ public class ServerConnection implements Runnable{
     public void run() {
         controller.updateLog("Server is waiting...");
         try {
-            Executor executor = Executors.newFixedThreadPool(8);
+            executorService = Executors.newFixedThreadPool(8);
             serverSocket = new ServerSocket(port);
             System.out.println("Server listening on port " + port);
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                executor.execute(new Thread(new ServerOperations(clientSocket, controller)));
+                executorService.execute(new Thread(new ServerOperations(clientSocket, controller)));
             }
         } catch (IOException e) {
             controller.updateLog("Server connection error: " + e.getMessage());
@@ -44,6 +46,17 @@ public class ServerConnection implements Runnable{
                     controller.updateLog("Socket closure ERROR: " + e.getMessage());
                     e.printStackTrace();
                 }
+            if (executorService != null) {
+                executorService.shutdown();
+                try {
+                    if (!executorService.awaitTermination(10, TimeUnit.SECONDS)) {
+                        executorService.shutdownNow();
+                    }
+                } catch (InterruptedException e) {
+                    executorService.shutdownNow();
+                    Thread.currentThread().interrupt();
+                }
+            }
         }
     }
 }

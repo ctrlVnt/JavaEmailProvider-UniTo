@@ -255,9 +255,7 @@ public class ServerOperations implements Runnable{
         JSONParser parser = new JSONParser();
 
         try (FileReader reader = new FileReader("Files/MailLists.json")) {
-            // Parse il file JSON in un oggetto Java
             Object obj = parser.parse(reader);
-            // Converti l'oggetto Java in un oggetto JSONObject
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray users = (JSONArray) jsonObject.get("users");
             for (int i = 0; i < users.size(); i++){
@@ -269,10 +267,8 @@ public class ServerOperations implements Runnable{
                         Object toObj = reademail.get("to");
                         List<String> toList = null;
                         if (toObj instanceof String) {
-                            // Caso in cui "to" è una singola stringa
                             toList = Collections.singletonList((String) toObj);
                         } else if (toObj instanceof JSONArray) {
-                            // Caso in cui "to" è un array di stringhe
                             JSONArray toArr = (JSONArray) toObj;
                             toList = new ArrayList<>(toArr.size());
 

@@ -25,12 +25,9 @@ public class ClientModel {
      */
 
     public ClientModel(String emailAddress) {
-        //Li passo Linked list ma va bene qualsiasi lista, serve per dirgli che stiamo lavorando con delle liste
         this.inboxContent = FXCollections.observableList(new LinkedList<>());
         this.inbox = new SimpleListProperty<>();
-        //Settiamo il contenuto di INBOX a alla INBOXCONTENT
         this.inbox.set(inboxContent);
-        //È inutile
         this.emailAddress = new SimpleStringProperty(emailAddress);
         this.allertConnection =  new SimpleStringProperty();
     }

@@ -88,21 +88,24 @@ public class ComposeController{
 
         for (String recipient : recipientEmails) {
             String email = recipient.trim();
-            if (!email.contains("@")) {
+            if (!email.matches("[A-Za-z0-9][A-Za-z0-9._%+-]*@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}")) {
                 dangerAlert.setVisible(true);
                 Text errorMessage = (Text) dangerAlert.getChildren().get(0);
-                errorMessage.setText("Indirizzo mail non valido o vuoto");
+                errorMessage.setText("Indirizzo mail non valido: " + email);
                 return;
             }
+
             if (uniqueReceivers.contains(email)) {
                 dangerAlert.setVisible(true);
                 Text errorMessage = (Text) dangerAlert.getChildren().get(0);
                 errorMessage.setText("Duplicato indirizzo mail: " + email);
                 return;
             }
+
             uniqueReceivers.add(email);
             receiversMail.add(email);
         }
+
 
         Email email = new Email(
                 senderTextField.getText(),
