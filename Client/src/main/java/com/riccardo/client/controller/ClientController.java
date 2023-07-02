@@ -153,7 +153,6 @@ public class ClientController {
     protected void onReplyAtAllButtonClick() {
         EmailModel email = new EmailModel(user);
         email.setSubject("RE: " + selectedEmail.getSubject());
-        System.out.println(selectedEmail.getReceivers().size());
         if(selectedEmail.getReceivers().size() == 1){
             onReplyButtonClick();
         }else{

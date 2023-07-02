@@ -23,6 +23,15 @@ Thanks to a pool thread it is possible to manage many clients without overloadin
 It's a Json file that is only read by the server.
 Server read information in the Json file and send to clients new mails or others informations.
 
+### Mails of test
+I created 5 mail of different format to test:
+
+* katherine.johnson@unito.it
+* doodo345@mymail.com
+* hford@gmail.com
+* riccardoventurini@yahoo.it
+* francois.marshal@usmb.fr
+
 ## Libraries that you need to execute this project
 It need to download follow libraries:
 

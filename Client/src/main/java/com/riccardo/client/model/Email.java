@@ -1,10 +1,7 @@
 package com.riccardo.client.model;
 
-import javafx.beans.property.StringProperty;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,32 +27,11 @@ public class Email implements Serializable {
      * @param subject    oggetto della mail
      * @param text       testo della mail
      */
-
-
     public Email(String sender, List<String> receivers, String subject, String text) {
         this.sender = sender;
         this.subject = subject;
         this.text = text;
         this.receivers = new ArrayList<>(receivers);
-    }
-
-    /**
-     * Costruttore della classe.
-     *
-     * @param id         id email
-     * @param sender     email del mittente
-     * @param receivers  emails dei destinatari
-     * @param subject    oggetto della mail
-     * @param text       testo della mail
-     * @param date       ora invio mail (secondo ricezione server)
-     */
-    public Email(int id, String sender, List<String> receivers, String subject, String text, String date) {
-        this.sender = sender;
-        this.subject = subject;
-        this.text = text;
-        this.receivers = new ArrayList<>(receivers);
-        this.date = date;
-        this.id = id;
     }
 
     /**

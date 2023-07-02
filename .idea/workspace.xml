@@ -9,10 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="Modificati log, inserita variabile per prima connessione">
+    <list default="true" id="7df48e31-0f8b-4686-aa36-5c9670770888" name="Changes" comment="Correzione variabile false">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/Email.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/riccardo/client/model/Email.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Files/MailLists.json" beforeDir="false" afterPath="$PROJECT_DIR$/Files/MailLists.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +91,7 @@
       <command value="mvn clean install" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="com.riccardo.client.Client" />
       <module name="Client" />
@@ -194,7 +196,7 @@
       <workItem from="1688109192142" duration="23000" />
       <workItem from="1688298911959" duration="27000" />
       <workItem from="1688324646067" duration="32000" />
-      <workItem from="1688328446351" duration="3828000" />
+      <workItem from="1688328446351" duration="6893000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1681642056980</created>
@@ -397,7 +399,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688331710608</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Correzione variabile false">
+      <option name="closed" value="true" />
+      <created>1688332291557</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1688332291557</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -415,7 +425,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Connection server" />
     <MESSAGE value="Il server invia la lista delle mail al client" />
     <MESSAGE value="Eliminazione di un elemento dal JSON" />
     <MESSAGE value="Iniziato invio messaggio" />
@@ -440,6 +449,7 @@
     <MESSAGE value="update gitignore" />
     <MESSAGE value="Eliminati i commenti, migliorata la replytoAll, aggiunta regex" />
     <MESSAGE value="Modificati log, inserita variabile per prima connessione" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modificati log, inserita variabile per prima connessione" />
+    <MESSAGE value="Correzione variabile false" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correzione variabile false" />
   </component>
 </project>
