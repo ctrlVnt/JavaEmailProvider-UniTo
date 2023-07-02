@@ -52,7 +52,7 @@ public class ServerOperations implements Runnable{
                         if(Objects.equals(deletemail.getId(), maildelete.get("id")))
                         {
                             iterator.remove();
-                            controller.updateLog(usermailbox + "--> mail id : deleted");
+                            controller.updateLog(usermailbox + "--> mail id " + deletemail.getId() + " : deleted");
                             updateJSON(jsonObject);
                             break;
                         }
@@ -131,7 +131,6 @@ public class ServerOperations implements Runnable{
             }
             updateJSON(jsonObject);
             if(found < receivers.size()){
-                controller.updateLog(usermailbox + "--> ERROR: mail id doesn't exist");
 
                 JSONObject errorMail = new JSONObject();
 
@@ -140,6 +139,9 @@ public class ServerOperations implements Runnable{
                         toListNotFound.add(receivers.get(i));
                     }
                 }
+
+                controller.updateLog(usermailbox + "--> ERROR: mail " + toListNotFound + " not found");
+
                 if(email.getSubject() == null || Objects.equals(email.getSubject(), "") || email.getSubject().trim().isEmpty()){
                     errorMail.put("subjects", "SEND ERROR: < empty subject >");
                 }else{
@@ -162,7 +164,7 @@ public class ServerOperations implements Runnable{
                 }
                 updateJSON(jsonObject);
             }
-            controller.updateLog(usermailbox + "--> mail id : sended");
+            controller.updateLog(usermailbox + "--> mail " + newId +" : sended");
 
         }catch (IOException | ClassNotFoundException | ParseException e) {
             throw new RuntimeException(e);
@@ -183,7 +185,7 @@ public class ServerOperations implements Runnable{
             outStream.writeObject(newEmails);
             outStream.flush();
 
-            controller.updateLog(user + "--> mail checked");
+            controller.updateLog(user + "--> mailbox checked");
 
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);

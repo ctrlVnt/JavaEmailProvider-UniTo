@@ -1,1 +1,23 @@
-{"users":[{"mails":[],"id":"katherine.johnson@unito.it"},{"mails":[],"id":"doodo345@mymail.com"},{"mails":[{"date":"Thu Jun 29 18:38:03 CEST 2023","subjects":"Fracca","from":"francois.marshal@usmb.fr","to":["doodo345@mymail.com","hford@gmail.com","francois.marshal@usmb.fr"],"text":"sss","id":1}],"id":"hford@gmail.com"},{"mails":[],"id":"riccardoventurini@yahoo.it"},{"mails":[{"date":"Thu Jun 29 18:38:40 CEST 2023","subjects":"RE: Fracca","from":"doodo345@mymail.com","to":["francois.marshal@usmb.fr"],"text":"\n\n-----------------------------------------------------------------------------------------------------\nfrom: francois.marshal@usmb.fr\nto: [doodo345@mymail.com, hford@gmail.com, francois.marshal@usmb.fr]\n\n|\tsss\n|\tThu Jun 29 18:38:03 CEST 2023\n","id":2},{"date":"Thu Jun 29 18:38:03 CEST 2023","subjects":"Fracca","from":"francois.marshal@usmb.fr","to":["doodo345@mymail.com","hford@gmail.com","francois.marshal@usmb.fr"],"text":"sss","id":1}],"id":"francois.marshal@usmb.fr"}]}
+{"users":[
+  {"mails":[],
+    "id":"katherine.johnson@unito.it"
+    },
+
+  {"mails":[],
+    "id":"doodo345@mymail.com"
+    },
+
+  {"mails":[],
+    "id":"hford@gmail.com"
+    },
+
+  {"mails":[],
+    "id":"riccardoventurini@yahoo.it"
+    },
+
+  {"mails":[],
+    "id":"francois.marshal@usmb.fr"
+    }
+
+  ]
+}

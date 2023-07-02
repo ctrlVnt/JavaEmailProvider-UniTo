@@ -7,6 +7,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import static java.net.InetAddress.getLocalHost;
+
 public class ServerConnection implements Runnable{
 
     ServerSocket serverSocket = null;
@@ -25,11 +27,10 @@ public class ServerConnection implements Runnable{
     }
     @Override
     public void run() {
-        controller.updateLog("Server is waiting...");
         try {
+            controller.updateLog("Server "+ getLocalHost() + " is waiting on port "+ port + "...");
             executorService = Executors.newFixedThreadPool(8);
             serverSocket = new ServerSocket(port);
-            System.out.println("Server listening on port " + port);
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 executorService.execute(new Thread(new ServerOperations(clientSocket, controller)));

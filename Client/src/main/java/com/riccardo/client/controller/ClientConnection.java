@@ -25,6 +25,7 @@ public class ClientConnection implements Runnable{
     private final int port;
     private final String operation;
     private Email mail;
+    private boolean firstconnection = true;
 
     /**
      * Costruttore della classe.
@@ -186,7 +187,11 @@ public class ClientConnection implements Runnable{
 
                 Platform.runLater(() -> {
                     if (emails != null && emails.size() > 0) {
-                        buildNotif(emails.size());
+                        if(!firstconnection) {
+                            buildNotif(emails.size());
+                        }else if(firstconnection){
+                            firstconnection = false;
+                        }
                         for (Email s : emails) {
                             model.addInboxContent(s);
                         }
