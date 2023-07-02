@@ -196,6 +196,7 @@ public class ClientConnection implements Runnable{
                             model.addInboxContent(s);
                         }
                     }
+                    firstconnection = false;
                 });
 
             } finally {
